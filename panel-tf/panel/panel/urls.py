@@ -28,7 +28,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('startpage.urls')),
     path('info_lists/', include('info_lists.urls')),
-    path('api/', include('api.urls')),
     path('box_office/', include('box_office.urls')),
     path('start_project/', include('start_project.urls')),
     path('bank/', include('bank.urls')),
