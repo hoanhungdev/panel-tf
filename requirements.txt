@@ -12,6 +12,7 @@ django-celery-beat==2.0.0
 django-cors-headers==3.3.0
 django-filter==2.2.0
 django-timezone-field==4.0
+djangorestframework
 flower==0.9.4
 google-api-core==1.17.0
 google-api-python-client==1.8.3
