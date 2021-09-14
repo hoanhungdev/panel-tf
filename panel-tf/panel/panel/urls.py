@@ -17,7 +17,6 @@ from django.contrib import admin
 from django.urls import path
 from django.urls import include
 from django.contrib.auth import views as auth_views
-from rest_framework.authtoken import views
 from django.views.decorators.csrf import csrf_exempt
 
 from startpage.forms import CustomAuthForm
