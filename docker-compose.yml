@@ -72,6 +72,7 @@ services:
     command: celery -A ${DJANGO_PROJECT_NAME} worker -l info
     env_file:
       - ./.env
+    environment: PATH=/usr/src/panel-tf/panel/startpage/services/selenium:$PATH
     links:
       - redis:redis
     depends_on: 
