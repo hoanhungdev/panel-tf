@@ -1,0 +1,104 @@
+<html>
+    <head>
+        <meta name="viewport", content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta charset="utf-8">
+        <title>
+            {% block title %}
+
+            {% endblock %} | Панель Техно Фасад
+        </title>
+
+        {% load static %}<link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.ico' %}"/>
+        <!-------------
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+        <script src="https://code.jquery.com/jquery.js"></script>
+
+        <script src="https://kit.fontawesome.com/a916534f55.js"></script>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+        --------------->
+        <script src="https://kit.fontawesome.com/a916534f55.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+
+
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">Панель Техно Фасад</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+            {% if perms.stup_ctrl.can_view %}
+            <a class="nav-item nav-link" href="" title="Управление выгрузками сводной таблицы учета проектов">Сводная</a>
+            {% endif %}
+            {% if perms.astk.can_view %}
+            <a class="nav-item nav-link" href="" title="Создание технологической карты">Тех. карта</a>
+            {% endif %}
+            {% if perms.iofromco.can_view %}
+            <a class="nav-item nav-link" href="" title="Создание внутреннего заказа на основе заказа покупателя">Вн. заказ</a>
+            {% endif %}
+            {% if perms.create_project_folder.can_view %}
+            <a class="nav-item nav-link" href="">Создать папку проекта</a>
+            {% endif %}
+            {% if perms.Kassy.can_view %}
+            <a class="nav-item nav-link" href="" title="Автоматическое внесение данных из касс">Кассы</a>
+            {% endif %}
+            {% if perms.createpaymentout.can_view %}
+            <a class="nav-item nav-link" href="" title="Создание исходящего платежа">Исх. платеж</a>
+            {% endif %}
+            {% if perms.checkpo.can_view %}
+            <a class="nav-item nav-link" href="" title="Проверка заказов поставщикам">Проверка заказов</a>
+            {% endif %}
+            {% if perms.bonuses.can_view %}
+            <a class="nav-item nav-link" href="" title="Управление выгрузками таблицы расчета бонусов сотрудникам">Бонусы</a>
+            {% endif %}
+            {% if perms.avto_programs.can_view %}
+            <a class="nav-item nav-link" href="{% url 'info_lists_url' %}" title="Информационные списки">Инф. списки</a>
+            {% endif %}
+            {% if perms.analytics.can_view %}
+            <a class="nav-item nav-link" href="" title="Аналитика работы программ Панели ТФ">Аналитика</a>
+            {% endif %}
+            {% if perms.start_project_ms.can_view %}
+            <a class="nav-item nav-link" href="">Запуск проекта в МС</a>
+            {% endif %}
+
+            {% if user.is_authenticated %}
+            <a class="nav-item nav-link" href="{% url 'logout_url' %}?next=/" style="color:#ff0000" title="Выйти из аккаунта {{ user.username }}">Выйти</a>
+            {% endif %}
+            </div>
+        </div>
+        </nav>
+
+
+
+        <h2>
+            <center>
+            {% block content_title %}
+
+            {% endblock %}
+            </center>
+        </h2>
+
+        {% block content %}
+
+        {% endblock %}
+
+    </body>
+</html>
+
+

@@ -1,0 +1,876 @@
+{% extends "info_lists/base.html" %}
+{% block content %}
+
+<style>
+.strongtext {
+    font-weight: bold;
+}
+.textmargin {
+    padding: 20px;
+}
+
+</style>
+
+<center>
+
+<div class='container justify-content-center'>
+    <div class='row justify-content-center'>
+        <div class='col-12 col-md-8'>
+            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                Инструкция
+            </button>
+            <div class="collapse" id="collapseExample">
+                <div class="card text-center">
+                  <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Выгрузить:</a>
+                        </li>
+                        <li class="nav-item active">
+                          <a class="nav-link active" data-toggle="list" href="#now" role="tab">Сейчас</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" data-toggle="list" href="#daily" role="tab">Ежедневно</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" data-toggle="list" href="#weekly" role="tab">Еженедельно</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" data-toggle="list" href="#monthly" role="tab">Ежемесячно и т.д.</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="now" role="tabpanel">
+                        <div class="textmargin">
+                            Данная вкладка объединяет в себе несколько мелких вспомогательных программ, выполняемых по расписанию.
+                            "Контрагенты", "Проекты", "Статьи расходов" — это списки, выгружаемые из системы МойСклад в гугл таблицу
+                            "<a href='https://docs.google.com/spreadsheets/d/1P3Qu6Uo49fGHO432Fe7G1-oib6NfsIwZ8U3TuKh6HnM/edit'>
+                            Информационные списки"</a>. "Продажи из МС" выгружаются в
+                            <a href='https://docs.google.com/spreadsheets/d/1pEGxytTSFLZKF0Z3uqvp0FhWbFfzV0fr7bhCuTarGE4/edit#gid=0'>
+                            эту таблицу</a>. А "Приём выписки" выгружает платежи из Альфа-Банка в МойСклад.
+                        </div>
+                    </div>
+                  <div class="tab-pane" id="daily" role="tabpanel">
+                        <div class="textmargin">
+                            Чтобы сделать выгрузку ежедневной нажмите "Добавить", в появившемся поле для выбора
+                            периодичности выгрузки будет стоять "Ежедневно", нажмите кнопку "Ок" напротив поля. Затем выберите время
+                            ежедневной выгрузки.
+                        </div>
+                  </div>
+                  <div class="tab-pane" id="weekly" role="tabpanel">
+                        <div class="textmargin">
+                            Чтобы сделать выгрузку еженедельной нажмите "Добавить", в появившемся поле для
+                            выбора периодичности выгрузки будет стоять "Еженедельно", нажмите кнопку "Ок"
+                            напротив поля. Затем выберите время ежедневной выгрузки.
+                            Дополнительно к времени выгрузки нужно указать дни недели, когда выгрузка будет
+                            срабатывать в указанное время. Чтобы выбрать день нажмите на него, кнопка станет синей.
+                            Чтобы отменить выбор нажмите на синюю кнопку, кнопка станет белой.
+                        </div>
+                  </div>
+                  <div class="tab-pane" id="monthly" role="tabpanel">
+                        <div class="textmargin">
+                            Чтобы сделать выгрузку ежемесячной, ежеквартальной или ежегодной нажмите "Добавить", в появившемся поле для
+                            выбора периодичности выгрузки выберите необходимый тип плана на выгрузку, нажмите кнопку "Ок"
+                            напротив поля.
+                            В отличии от других планов на выгрузку тут нужно указать только дату следующей выгрузки.
+                            Выгрузка произойдет в ближайшее время указанного дня. Дата следующей выгрузки поменяется
+                            (+1, +3, +12 месяцев соответственно).
+                        </div>
+                  </div>
+                  <div class="tab-pane" id="settings" role="tabpanel">...</div>
+                </div>
+            </div>
+            <div class="card text-center" style='margin-top: 15px;'>
+                <div class="card-header">
+                    <div style='font-size: 1.25rem; font-weight: 500;'>
+                        Ссылка на ТЗ
+                    </div>
+                </div>
+                <a href='https://docs.google.com/spreadsheets/d/1eZF4RbYLTf7ReHud56PoI_x-_MgpaxKQx7Eikjd1uy8/edit#gid=0' style='margin: 15px;'>
+                    Гугл документ
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+{% for load in Loads %}
+<div class='container justify-content-center' style='margin-top: 15px;'>
+    <div class='row justify-content-center'>
+        <div class='col-12 col-md-8'>
+            <div class="card" style="width: 100%;" id='load{{ load.id }}'>
+                <div class="card-body" id='card_body'>
+                    <h5 class="card-title">{{ load.title }}</h5>
+                    <p class="card-text" style='margin-bottom: 10px;'>
+                        {% if load.progress > 0 %}
+                        <button id='load_date{{ load.id }}' onclick='StartLoad({{ load.id }});' class="btn btn-primary btn-md" disabled>Выгрузить сейчас</button>
+                        {% else %}
+                        <button id='load_date{{ load.id }}' onclick='StartLoad({{ load.id }});' class="btn btn-primary btn-md">Выгрузить сейчас</button>
+                        {% endif %}
+                        {% if perms.info_lists.can_edit_plans and load.sheet_name != '-' %}
+                        <div class='row justify-content-center' style='margin-bottom: 5px;'>
+                            <div class='col-12 col-lg-6' style='margin-bottom: 5px;'>
+                                <div class="input-group">
+                                  <div class="input-group-prepend">
+                                    <span class="input-group-text">Лист</span>
+                                  </div>
+                                  <input id='sheet_name{{ load.id }}' onclick='$("#sheet_name_accept{{ load.id }}").attr("class", "btn btn-success");' class="form-control" value='{{ load.sheet_name }}'>
+                                  <div class="input-group-append">
+                                      <button class="btn btn-outline-success" type="button" id="sheet_name_accept{{ load.id }}" onclick='sheet_name_accept({{ load.id }});'>Ок</button>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% if perms.info_lists.can_edit_plans and load.table_url != '-' %}
+                        <div class='row' style='margin-bottom: 10px;'>
+                            <div class='col'>
+                                <div class="input-group">
+                                  <div class="input-group-prepend">
+                                    <span class="input-group-text">Гугл таблица</span>
+                                  </div>
+                                  <input id='table_url{{ load.id }}' onclick='$("#table_url_accept{{ load.id }}").attr("class", "btn btn-success");' class="form-control" value='{{ load.table_url }}'>
+                                  <div class="input-group-append">
+                                      <button class="btn btn-outline-success" type="button" id="table_url_accept{{ load.id }}" onclick='table_url_accept({{ load.id }});'>Ок</button>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        <div class="progress" id="progress_bar">
+                            <div id="dynamic{{ load.id }}" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{ load.progress }}%">{{ load.progress }}%</div>
+                        </div>
+                        <br>
+                        Расписание:
+                        <div class='plans' id='plans{{ load.id }}' style='margin-top: 10px;'>
+{% for plan in load.plans.all %}
+<div class='row align-items-center justify-content-center' id='plan{{ plan.id }}' style='margin-top: 10px;'>
+    <div class='col'>
+        <div class="card">
+            <div class='row align-items-center justify-content-between'>
+                <div class='col-auto'>
+                    <div class="card">
+                        <div id='number_of_plan' class="card-body" style="padding: 6px; padding-left: 13px; padding-right: 13px;">
+                            {{ plan.number }}
+                        </div>
+                    </div>
+                </div>
+                <div class='col'>
+                    {% if plan.type == 'daily' %}
+                    <b>Ежедневно</b> в
+                    <select id='select_daily_time_period{{ plan.id }}' name='select_daily_time_period{{ plan.id }}' {% if not perms.info_lists.can_edit_plans %}disabled{% endif %}>
+                        {% if plan.daily.time_str == '05:00' %}
+                        <option selected value='05:00'>05:00</option>
+                        {% else %}
+                        <option value='05:00'>05:00</option>
+                        {% endif %}
+                        {% if plan.daily.time_str == '07:00' %}
+                        <option selected value='07:00'>07:00</option>
+                        {% else %}
+                        <option value='07:00'>07:00</option>
+                        {% endif %}
+                        {% if plan.daily.time_str == '08:00' %}
+                        <option selected value='08:00'>08:00</option>
+                        {% else %}
+                        <option value='08:00'>08:00</option>
+                        {% endif %}
+                        {% if plan.daily.time_str == '10:00' %}
+                        <option selected value='10:00'>10:00</option>
+                        {% else %}
+                        <option value='10:00'>10:00</option>
+                        {% endif %}
+                        {% if plan.daily.time_str == '13:00' %}
+                        <option selected value='13:00'>13:00</option>
+                        {% else %}
+                        <option value='13:00'>13:00</option>
+                        {% endif %}
+                        {% if plan.daily.time_str == '16:00' %}
+                        <option selected value='16:00'>16:00</option>
+                        {% else %}
+                        <option value='16:00'>16:00</option>
+                        {% endif %}
+                    </select>
+                    {% endif %}
+                    {% if plan.type == 'weekly' %}
+                    <div class='row align-items-center justify-content-center' id='select_day_period{{ plan.id }}' name='select_day_period{{ plan.id }}'>
+                        Каждые&nbsp
+                        {% if 'понедельник' in plan.weekly.all_days %}
+                            <button id ='btn1' type="button" class="btn btn-info" onclick='UnMarkDay({{ plan.id }}, 1)' {% if not perms.info_lists.can_edit_plans %}disabled{% endif %}>Пн</button>
+                        {% else %}
+                            <button id ='btn1' type="button" class="btn btn-outline-info" onclick='MarkDay({{ plan.id }}, 1)' {% if not perms.info_lists.can_edit_plans %}disabled{% endif %}>Пн</button>
+                        {% endif %}&nbsp
+                        {% if 'вторник' in plan.weekly.all_days %}
+                            <button id ='btn2' type="button" class="btn btn-info" onclick='UnMarkDay({{ plan.id }}, 2)' {% if not perms.info_lists.can_edit_plans %}disabled{% endif %}>Вт</button>
+                        {% else %}
+                            <button id ='btn2' type="button" class="btn btn-outline-info" onclick='MarkDay({{ plan.id }}, 2)' {% if not perms.info_lists.can_edit_plans %}disabled{% endif %}>Вт</button>
+                        {% endif %}&nbsp
+                        {% if 'среда' in plan.weekly.all_days %}
+                            <button id ='btn3' type="button" class="btn btn-info" onclick='UnMarkDay({{ plan.id }}, 3)' {% if not perms.info_lists.can_edit_plans %}disabled{% endif %}>Ср</button>
+                        {% else %}
+                            <button id ='btn3' type="button" class="btn btn-outline-info" onclick='MarkDay({{ plan.id }}, 3)' {% if not perms.info_lists.can_edit_plans %}disabled{% endif %}>Ср</button>
+                        {% endif %}&nbsp
+                        {% if 'четверг' in plan.weekly.all_days %}
+                            <button id ='btn4' type="button" class="btn btn-info" onclick='UnMarkDay({{ plan.id }}, 4)' {% if not perms.info_lists.can_edit_plans %}disabled{% endif %}>Чт</button>
+                        {% else %}
+                            <button id ='btn4' type="button" class="btn btn-outline-info" onclick='MarkDay({{ plan.id }}, 4)' {% if not perms.info_lists.can_edit_plans %}disabled{% endif %}>Чт</button>
+                        {% endif %}&nbsp
+                        {% if 'пятница' in plan.weekly.all_days %}
+                            <button id ='btn5' type="button" class="btn btn-info" onclick='UnMarkDay({{ plan.id }}, 5)' {% if not perms.info_lists.can_edit_plans %}disabled{% endif %}>Пт</button>
+                        {% else %}
+                            <button id ='btn5' type="button" class="btn btn-outline-info" onclick='MarkDay({{ plan.id }}, 5)' {% if not perms.info_lists.can_edit_plans %}disabled{% endif %}>Пт</button>
+                        {% endif %}&nbsp
+                        {% if 'суббота' in plan.weekly.all_days %}
+                            <button id ='btn6' type="button" class="btn btn-info" onclick='UnMarkDay({{ plan.id }}, 6)' {% if not perms.info_lists.can_edit_plans %}disabled{% endif %}>Сб</button>
+                        {% else %}
+                            <button id ='btn6' type="button" class="btn btn-outline-info" onclick='MarkDay({{ plan.id }}, 6)' {% if not perms.info_lists.can_edit_plans %}disabled{% endif %}>Сб</button>
+                        {% endif %}&nbsp
+                        {% if 'воскресенье' in plan.weekly.all_days %}
+                            <button id ='btn7' type="button" class="btn btn-info" onclick='UnMarkDay({{ plan.id }}, 7)' {% if not perms.info_lists.can_edit_plans %}disabled{% endif %}>Вс</button>
+                        {% else %}
+                            <button id ='btn7' type="button" class="btn btn-outline-info" onclick='MarkDay({{ plan.id }}, 7)' {% if not perms.info_lists.can_edit_plans %}disabled{% endif %}>Вс</button>
+                        {% endif %}
+                        &nbspв&nbsp
+                        <select id='select_weekly_time_period{{ plan.id }}' name='select_weekly_time_period{{ plan.id }}' {% if not perms.info_lists.can_edit_plans %}disabled{% endif %}>
+                            {% if plan.daily.time_str == '05:00' %}
+                            <option selected value='05:00'>05:00</option>
+                            {% else %}
+                            <option value='05:00'>05:00</option>
+                            {% endif %}
+                            {% if plan.daily.time_str == '07:00' %}
+                            <option selected value='07:00'>07:00</option>
+                            {% else %}
+                            <option value='07:00'>07:00</option>
+                            {% endif %}
+                            {% if plan.weekly.time_str == '08:00' %}
+                                <option selected value='08:00'>08:00</option>
+                            {% else %}
+                                <option value='08:00'>08:00</option>
+                            {% endif %}
+                            {% if plan.weekly.time_str == '10:00' %}
+                                <option selected value='10:00'>10:00</option>
+                            {% else %}
+                                <option value='10:00'>10:00</option>
+                            {% endif %}
+                            {% if plan.weekly.time_str == '13:00' %}
+                                <option selected value='13:00'>13:00</option>
+                            {% else %}
+                                <option value='13:00'>13:00</option>
+                            {% endif %}
+                            {% if plan.weekly.time_str == '16:00' %}
+                                <option selected value='16:00'>16:00</option>
+                            {% else %}
+                                <option value='16:00'>16:00</option>
+                            {% endif %}
+                        </select>
+                    </div>
+                    {% endif %}
+                    {% if plan.type == 'monthly' %}
+                        {% if plan.monthly.type == 'regular' %}
+                            <b>Ежемесячно</b>, следующая выгрузка <input id='select_monthly_date_period{{ plan.id }}' type='date' value="{{plan.monthly.get_next_date}}" {% if not perms.info_lists.can_edit_plans %}disabled{% endif %}></input>
+                        {% elif plan.monthly.type == 'first_work_day' %}
+                            <b>Ежемесячно</b>, в первый рабочий день начиная с <input id='select_monthly_date_period{{ plan.id }}' type='date' value="{{plan.monthly.get_next_date}}" {% if not perms.info_lists.can_edit_plans %}disabled{% endif %}></input>
+                        {% elif plan.monthly.type == 'second_work_day' %}
+                            <b>Ежемесячно</b>, во второй рабочий день начиная с <input id='select_monthly_date_period{{ plan.id }}' type='date' value="{{plan.monthly.get_next_date}}" {% if not perms.info_lists.can_edit_plans %}disabled{% endif %}></input>
+                        {% elif plan.monthly.type == '' %}
+                            <div class='row align-items-center justify-content-center'>
+                                Ежемесячная выгрузка&nbsp
+                                <select id='select_monthly_type{{ plan.id }}' name='select' style="margin-right: 6px;" {% if not perms.info_lists.can_edit_plans %}disabled{% endif %}>
+                                    <option>Обычная</option>
+                                    <option>Первый рабочий день</option>
+                                    <option>Второй рабочий день</option>
+                                </select>
+                                <button id='smbtn' onclick='SelectPlanMonthlyType({{ plan.id }}, {{ load.id }})' class="btn btn-primary" {% if not perms.info_lists.can_edit_plans %}disabled{% endif %}>Ок</button>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                    {% if plan.type == 'quarterly' %}
+                        <b>Ежеквартально</b>, следующая выгрузка <input id='select_quarterly_date_period{{ plan.id }}' type='date' value="{{plan.quarterly.date}}" {% if not perms.info_lists.can_edit_plans %}disabled{% endif %}></input>
+                    {% endif %}
+                    {% if plan.type == 'yearly' %}
+                        <b>Ежегодно</b>, следующая выгрузка <input id='select_yearly_date_period{{ plan.id }}' type='date' value="{{plan.yearly.date}}" {% if not perms.info_lists.can_edit_plans %}disabled{% endif %}></input>
+                    {% endif %}
+                    {% if plan.type == '' %}
+                        <div class='row align-items-center justify-content-center'>
+                            <select id='select{{ plan.id }}' name='select' style="margin-right: 6px;" {% if not perms.info_lists.can_edit_plans %}disabled{% endif %}>
+                                <option>Ежедневно</option>
+                                <option>Еженедельно</option>
+                                <option>Ежемесячно</option>
+                                <option>Ежеквартально</option>
+                                <option>Ежегодно</option>
+                            </select>
+                            <button id='smbtn' onclick='SelectPlanType({{ plan.id }}, {{ load.id }})' class="btn btn-primary" {% if not perms.info_lists.can_edit_plans %}disabled{% endif %}>Ок</button>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class='col-auto'>
+                    {% if plan.monthly.get_next_date != plan.monthly.get_shift_date %}
+                        <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="left" data-html="true" title='Выгрузка произойдет в ближайший рабочий день.'>
+                            ?
+                        </button>
+                    {% endif %}
+                    <button id='delete_plan' onclick='DeletePlan({{ plan.id }}, {{ load.id }});' type="button" class="btn btn-danger" {% if not perms.info_lists.can_edit_plans %}disabled{% endif %}>&#215</i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+                        </div>
+                    </p>
+                    <button id='addplan' class="btn btn-outline-success" onclick='AddPlan({{ load.id }});' {% if not perms.info_lists.can_edit_plans %}disabled{% endif %}>Добавить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+</center>
+
+<div class="row fixed-bottom">
+    <div class="col">
+    </div>
+    <div class='col-auto' id='alert_place'>
+        {% for a in Alerts %}
+        {% if not a.hidden %}
+        <div role="alert" aria-live="assertive" aria-atomic="true" class="toast animated fadeIn delay-1s" data-autohide="false" id='{{ a.id }}'>
+          <div class="toast-header">
+            <strong class="mr-auto">Ошибка!</strong>
+            <small>{{a.date}}</small>
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close" onclick='hide_alert({{a.id}});'>
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="toast-body">
+            {{a.title}}
+          </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+
+
+
+
+
+
+<br><br><br>
+<div id='help_elements'>
+<!---------Модули для работы панели----------->
+
+<!---------Ошибка----------->
+<div id='alert' role="alert" aria-live="assertive" aria-atomic="true" class="toast animated fadeIn" data-autohide="false"style='visibility: hidden;'>
+  <div class="toast-header">
+    <strong class="mr-auto">Ошибка!</strong>
+    <small id='alert_date'></small>
+    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close" id='hide_alert' onclick='hide_alert("id");'>
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="toast-body" id='alert_title'>
+  </div>
+</div>
+
+<div class='row align-items-center justify-content-center' id='select_monthly_type' style='visibility: hidden;'>
+    Ежемесячная выгрузка&nbsp
+    <select id='select_monthly_type{{ plan.id }}' name='select' style="margin-right: 6px;" {% if not perms.info_lists.can_edit_plans %}disabled{% endif %}>
+        <option>Обычная</option>
+        <option>Первый рабочий день</option>
+        <option>Второй рабочий день</option>
+    </select>
+    <button id='smbtn' onclick='SelectPlanMonthlyType({{ plan.id }}, {{ load.id }})' class="btn btn-primary" {% if not perms.info_lists.can_edit_plans %}disabled{% endif %}>Ок</button>
+</div>
+
+<!---------Выбор периодичности----------->
+<div class='row align-items-center' id='choice' style='visibility: hidden;margin: 0px;margin-top: 10px;padding: 0px;'>
+    <div class='col'>
+        <div class="card">
+            <div class='row align-items-center justify-content-between'>
+                <div class='col-auto'>
+                    <div class="card">
+                        <div id='number_of_plan' class="card-body" style="padding: 6px; padding-left: 13px; padding-right: 13px;">
+                            plan_number
+                        </div>
+                    </div>
+                </div>
+                <div class='col'>
+                    <div class='row align-items-center justify-content-center' id='select_plan_type'>
+                        <select id='selectplan_id' name='select' style="margin-right: 6px;">
+                            <option>Ежедневно</option>
+                            <option>Еженедельно</option>
+                            <option>Ежемесячно</option>
+                            <option>Ежеквартально</option>
+                            <option>Ежегодно</option>
+                        </select>
+                        <button id='smbtn' onclick='SelectPlanType(plan_id)' class="btn btn-primary">Ок</button>
+                    </div>
+                </div>
+                <div class='col-auto'>
+                    <button id='delete_plan' onclick='DeletePlan(plan_id, load_id);' type="button" class="btn btn-danger">&#215</i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!---------Выбор времени----------->
+<select id='select_time_period' style='visibility: hidden'>
+    <option>05:00</option>
+    <option>07:00</option>
+    <option>08:00</option>
+    <option>10:00</option>
+    <option>13:00</option>
+    <option>16:00</option>
+</select>
+
+<!---------Выбор дня----------->
+<div id='select_day_period' style='visibility: hidden'>
+    <button id ='btn1' type="button" class="btn btn-outline-info" onclick='MarkDay(plan.id, 1)'>Пн</button>
+    <button id ='btn2' type="button" class="btn btn-outline-info" onclick='MarkDay(plan.id, 2)'>Вт</button>
+    <button id ='btn3' type="button" class="btn btn-outline-info" onclick='MarkDay(plan.id, 3)'>Ср</button>
+    <button id ='btn4' type="button" class="btn btn-outline-info" onclick='MarkDay(plan.id, 4)'>Чт</button>
+    <button id ='btn5' type="button" class="btn btn-outline-info" onclick='MarkDay(plan.id, 5)'>Пт</button>
+    <button id ='btn6' type="button" class="btn btn-outline-info" onclick='MarkDay(plan.id, 6)'>Сб</button>
+    <button id ='btn7' type="button" class="btn btn-outline-info" onclick='MarkDay(plan.id, 7)'>Вс</button>
+</div>
+
+<!---------Выбор даты----------->
+<input id='select_date_period' type='date' style='visibility: hidden'></input>
+</div>
+
+<script>
+var month = new Array("01","02","03","04","05","06","07","08","09","10","11","12");
+$('.toast').toast('show');
+$('[data-toggle="tooltip"]').tooltip()
+$('#help_elements').hide();
+$('select').change(function(){SelectsChange($(this))});
+$('input').change(function(){InputsChange($(this))});
+
+function table_url_accept(load_id) {
+    new_table_url = $('#table_url' + load_id).val();
+    var xhr = new XMLHttpRequest();
+    var body = 'type=' + 'change_table_url' + '&load_id=' + encodeURIComponent(load_id) + '&table_url=' + encodeURIComponent(new_table_url);
+    xhr.open("POST", '/info_lists/load', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+    xhr.onload = function() {$('#table_url_accept' + load_id).attr('class', 'btn btn-outline-success');}
+    xhr.send(body);
+}
+
+function sheet_name_accept(load_id) {
+    new_sheet_name = $('#sheet_name' + load_id).val();
+    var xhr = new XMLHttpRequest();
+    var body = 'type=' + 'change_sheet_name' + '&load_id=' + encodeURIComponent(load_id) + '&sheet_name=' + encodeURIComponent(new_sheet_name);
+    xhr.open("POST", '/info_lists/load', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+    xhr.onload = function() {$('#sheet_name_accept' + load_id).attr('class', 'btn btn-outline-success');}
+    xhr.send(body);
+}
+
+function hide_alert(alert_id){
+    $('.toast#' + alert_id).remove();
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "/info_lists/hide_alert/" + alert_id);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+    xhr.send();
+}
+
+function StartLoad(load_id){
+    $('#load_date' + load_id).prop("disabled", true);
+    date_from = $('#date_from' + load_id).val();
+    date_to = $('#date_to' + load_id).val();
+    var xhr = new XMLHttpRequest();
+    var body = 'type=' + 'start' + '&load_id=' + encodeURIComponent(load_id) + '&date_from=' + encodeURIComponent(date_from) + '&date_to=' + encodeURIComponent(date_to);
+    xhr.open("POST", '/info_lists/load', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+	xhr.onload = function() {
+		console.log(xhr.responseText);
+	}
+    xhr.send(body);
+};
+
+var m = 0;
+function GetProgress(){
+    var xhr = new XMLHttpRequest();
+    var body = 'type=' + 'get_progress';
+    xhr.open("POST", '/info_lists/load', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+    xhr.onload = function() {
+        response = JSON.parse(xhr.responseText);
+        for (let i = 0; i < response.progress.length; i++) {
+            var load_id = response.progress[i].id;
+            var load_progress = response.progress[i].progress;
+            var value = load_progress + '%';
+            $('#dynamic' + load_id).css('width', value);
+            $('#dynamic' + load_id).html(value);
+            if (load_progress == 0) {
+                m += 1;
+                if (m % 5 == 0){
+                    $('#load_date' + load_id).prop("disabled", false);
+                }
+
+            }
+        }
+        if ($('.toast').length - 1 != response.alerts.length) {
+            for (let i = 0; i < response.alerts.length; i++) {
+                var alert_id = response.alerts[i].id;
+                var alert_date = response.alerts[i].date;
+                var alert_title = response.alerts[i].title;
+                var a = 0;
+                $('.toast').each(function() {if ($(this).attr('id') == alert_id) {a = 1;}});
+                if (a == 0) {
+                    var Copy = $('#alert').clone();
+                    Copy.find('#hide_alert').attr('onclick', 'hide_alert(' + alert_id + ');');
+                    Copy.attr('id', alert_id);
+                    Copy.find('#alert_date').text(alert_date);
+                    Copy.find('#alert_title').text(alert_title);
+                    Copy.css('visibility', 'visible');
+                    Copy.appendTo('#alert_place');
+                }
+            }
+        }
+    }
+    xhr.send(body);
+    setTimeout(GetProgress, 1500);
+};
+
+setTimeout(GetProgress, 1500);
+
+
+
+function AddPlan(load_id) {
+    var Copy = $('#choice').last().clone();
+    Copy.css('margin-right', '');
+    Copy.css('margin-left', '');
+    var Num = $('#plans' + load_id).children().length;
+    Copy.find('#number_of_plan').text(Num + 1);
+    Copy.css('visibility', 'visible');
+    Copy.appendTo('#plans' + load_id);
+    var xhr = new XMLHttpRequest();
+    var body = 'type=' + 'create' + '&number=' + encodeURIComponent(Num + 1) + '&load_id=' + encodeURIComponent(load_id);
+    xhr.open("POST", '/info_lists/plan_edit', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+    xhr.onload = function() {
+        var plan_id = JSON.parse(xhr.responseText).plan_id;
+        Copy.attr("id", 'plan' + plan_id);
+        Copy.find('#select_plan_type').children('select').attr("id", 'select' + plan_id);
+        Copy.find('#smbtn').attr("onclick", 'SelectPlanType(' + plan_id + ', ' + load_id + ');');
+        Copy.find('#delete_plan').attr("onclick", 'DeletePlan(' + plan_id + ', ' + load_id + ');');
+    };
+    xhr.send(body);
+};
+
+function DeletePlan(plan_id, load_id) {
+    $('#plan' + plan_id).remove();
+
+    var xhr = new XMLHttpRequest();
+    var body = 'type=' + 'delete' + '&plan_id=' + encodeURIComponent(plan_id);
+    xhr.open("POST", '/info_lists/plan_edit', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+    xhr.send(body);
+
+    var Num = 0;
+    $('#plans' + load_id).children().each(function () {
+        Num += 1;
+        $(this).find('#number_of_plan').text(Num);
+        var temp_plan_id = $(this).attr("id");
+        temp_plan_id = temp_plan_id.slice(4); //обрезаю "plan" оставляю только id в бд
+        var xhr = new XMLHttpRequest();
+        var body = 'type=' + 'change_number' + '&plan_id=' + encodeURIComponent(temp_plan_id) + '&number=' + encodeURIComponent(Num);
+        xhr.open("POST", '/info_lists/plan_edit', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+        xhr.send(body);
+        //$(this).find('#plan_body').children('select').attr("id", 'select' + Num);
+        //$(this).find('#smbtn').attr("onclick", 'SelectMode(' + Num + ');');
+    });
+    $('select').change(function(){SelectsChange($(this))});
+    $('input').change(function(){InputsChange($(this))});
+};
+
+function SelectPlanMonthlyType(plan_id, load_id) {
+    var load = $('#load' + load_id);
+    var select = load.find('#select_monthly_type' + plan_id);
+    var select_value = select.val();
+    var plan_body = select.parent().parent();
+    var date = new Date();
+    if (select_value == 'Обычная') {
+        plan_body.children().each(function () {
+            $(this).remove();
+        });
+        plan_body.append('<div><b>Ежемесячно</b>, следующая выгрузка&nbsp</div>');
+        var date_select = $('#select_date_period').clone();
+        date_select.attr('id', 'select_monthly_date_period' + plan_id);
+        var day = ("0" + date.getDate()).slice(-2);
+        var month = ("0" + (date.getMonth() + 1)).slice(-2);
+        var today = date.getFullYear()+"-"+(month)+"-"+(day) ;
+        date_select.val(today);
+        date_select.css('visibility', 'visible');
+        plan_body.append(date_select);
+        var xhr = new XMLHttpRequest();
+        var body = 'type=' + 'change_type' + '&plan_id=' + encodeURIComponent(plan_id) + '&plan_type=' + 'monthly' + '&monthly_type=' + 'regular';
+        xhr.open("POST", '/info_lists/plan_edit', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+        xhr.send(body);
+    } else if (select_value == 'Первый рабочий день') {
+        plan_body.children().each(function () {
+            $(this).remove();
+        });
+        plan_body.append('<div><b>Ежемесячно</b>, в первый рабочий день начиная с&nbsp</div>');
+        var date_select = $('#select_date_period').clone();
+        date_select.attr('id', 'select_monthly_date_period' + plan_id);
+        var day = ("0" + date.getDate()).slice(-2);
+        var month = ("0" + (date.getMonth() + 1)).slice(-2);
+        var today = date.getFullYear()+"-"+(month)+"-"+(day) ;
+        date_select.val(today);
+        date_select.css('visibility', 'visible');
+        plan_body.append(date_select);
+        var xhr = new XMLHttpRequest();
+        var body = 'type=' + 'change_type' + '&plan_id=' + encodeURIComponent(plan_id) + '&plan_type=' + 'monthly' + '&monthly_type=' + 'first_work_day';
+        xhr.open("POST", '/info_lists/plan_edit', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+        xhr.send(body);
+    } else if (select_value == 'Второй рабочий день') {
+        plan_body.children().each(function () {
+            $(this).remove();
+        });
+        plan_body.append('<div><b>Ежемесячно</b>, во второй рабочий день начиная с&nbsp</div>');
+        var date_select = $('#select_date_period').clone();
+        date_select.attr('id', 'select_monthly_date_period' + plan_id);
+        var day = ("0" + date.getDate()).slice(-2);
+        var month = ("0" + (date.getMonth() + 1)).slice(-2);
+        var today = date.getFullYear()+"-"+(month)+"-"+(day) ;
+        date_select.val(today);
+        date_select.css('visibility', 'visible');
+        plan_body.append(date_select);
+        var xhr = new XMLHttpRequest();
+        var body = 'type=' + 'change_type' + '&plan_id=' + encodeURIComponent(plan_id) + '&plan_type=' + 'monthly' + '&monthly_type=' + 'second_work_day';
+        xhr.open("POST", '/info_lists/plan_edit', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+        xhr.send(body);
+    }
+    $('select').change(function(){SelectsChange($(this))});
+    $('input').change(function(){InputsChange($(this))});
+}
+
+function SelectPlanType(plan_id, load_id) {
+    var load = $('#load' + load_id)
+    var select = load.find('#select' + plan_id)
+    var select_value = select.val();
+    var plan_body = select.parent();
+    var date= new Date();
+    if (select_value == 'Ежедневно') {
+        plan_body.children().each(function () {
+            $(this).remove();
+        });
+        plan_body.append('<div><b>Ежедневно</b> в &nbsp</div>');
+        var time_select = $('#select_time_period').clone();
+        time_select.attr('id', 'select_daily_time_period' + plan_id);
+        time_select.css('visibility', 'visible');
+        plan_body.append(time_select);
+        var xhr = new XMLHttpRequest();
+        var body = 'type=' + 'change_type' + '&plan_id=' + encodeURIComponent(plan_id) + '&plan_type=' + 'daily';
+        xhr.open("POST", '/info_lists/plan_edit', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+        xhr.send(body);
+    } else if (select_value == 'Еженедельно') {
+        plan_body.children().each(function () {
+            $(this).remove();
+        });
+        plan_body.append('<div>Каждые &nbsp</div>');
+
+        var day_select = $('#select_day_period').clone();
+        day_select.attr('id', 'select_day_period' + plan_id);
+        day_select.css('visibility', 'visible');
+        var button_number = 0
+        day_select.children().each(function () {
+            button_number += 1
+            $(this).attr('onclick', 'MarkDay(' + plan_id + ', ' + button_number + ');');
+        });
+
+        plan_body.append(day_select);
+
+        plan_body.append('<div>&nbsp в &nbsp</div>');
+
+        var time_select = $('#select_time_period').clone();
+        time_select.attr('id', 'select_weekly_time_period' + plan_id);
+        time_select.css('visibility', 'visible');
+        plan_body.append(time_select);
+        var xhr = new XMLHttpRequest();
+        var body = 'type=' + 'change_type' + '&plan_id=' + encodeURIComponent(plan_id) + '&plan_type=' + 'weekly';
+        xhr.open("POST", '/info_lists/plan_edit', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+        xhr.send(body);
+    } else if (select_value == 'Ежемесячно') {
+        plan_body.children().each(function () {
+            $(this).remove();
+        });
+        var select_monthly_type = $('#select_monthly_type').clone();
+        select_monthly_type.attr('id', '');
+        select_monthly_type.find('select').attr('id', 'select_monthly_type' + plan_id);
+        select_monthly_type.find('button').attr('onclick', 'SelectPlanMonthlyType(' + plan_id + ',' + load_id + ');');
+        select_monthly_type.css('visibility', 'visible');
+        plan_body.append(select_monthly_type);
+        var xhr = new XMLHttpRequest();
+        var body = 'type=' + 'change_type' + '&plan_id=' + encodeURIComponent(plan_id) + '&plan_type=' + 'monthly' + '&monthly_type=' + '';
+        xhr.open("POST", '/info_lists/plan_edit', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+        xhr.send(body);
+    } else if (select_value == 'Ежеквартально') {
+        plan_body.children().each(function () {
+            $(this).remove();
+        });
+        plan_body.append('<div><b>Ежеквартально</b>, следующая выгрузка&nbsp</div>');
+        var date_select = $('#select_date_period').clone();
+        date_select.attr('id', 'select_quarterly_date_period' + plan_id);
+        var day = ("0" + date.getDate()).slice(-2);
+        var month = ("0" + (date.getMonth() + 1)).slice(-2);
+        var today = date.getFullYear()+"-"+(month)+"-"+(day) ;
+        date_select.val(today);
+        date_select.css('visibility', 'visible');
+        plan_body.append(date_select);
+        var xhr = new XMLHttpRequest();
+        var body = 'type=' + 'change_type' + '&plan_id=' + encodeURIComponent(plan_id) + '&plan_type=' + 'quarterly';
+        xhr.open("POST", '/info_lists/plan_edit', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+        xhr.send(body);
+    } else if (select_value == 'Ежегодно') {
+        plan_body.children().each(function () {
+            $(this).remove();
+        });
+        plan_body.append('<div><b>Ежегодно</b>, следующая выгрузка&nbsp</div>');
+        var date_select = $('#select_date_period').clone();
+        date_select.attr('id', 'select_yearly_date_period' + plan_id);
+        var day = ("0" + date.getDate()).slice(-2);
+        var month = ("0" + (date.getMonth() + 1)).slice(-2);
+        var today = date.getFullYear()+"-"+(month)+"-"+(day) ;
+        date_select.val(today);
+        date_select.css('visibility', 'visible');
+        plan_body.append(date_select);
+        var xhr = new XMLHttpRequest();
+        var body = 'type=' + 'change_type' + '&plan_id=' + encodeURIComponent(plan_id) + '&plan_type=' + 'yearly';
+        xhr.open("POST", '/info_lists/plan_edit', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+        xhr.send(body);
+    }
+    $('select').change(function(){SelectsChange($(this))});
+    $('input').change(function(){InputsChange($(this))});
+};
+
+function SelectsChange(myitem){
+    var select_value = myitem.val();
+    var select_id = myitem.attr('id');
+    if (select_id.includes('select_daily_time_period')) {
+        plan_id = select_id.slice(24); //обрезаю "select_daily_time_period" оставляю только id в бд
+        var xhr = new XMLHttpRequest();
+        var body = 'type=' + 'change_daily_time' + '&plan_id=' + encodeURIComponent(plan_id) + '&time=' + select_value;
+        xhr.open("POST", '/info_lists/plan_edit', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+        xhr.send(body);
+    } else if (select_id.includes('select_weekly_time_period')) {
+        plan_id = select_id.slice(25); //обрезаю "select_weekly_time_period" оставляю только id в бд
+        var xhr = new XMLHttpRequest();
+        var body = 'type=' + 'change_weekly_time' + '&plan_id=' + encodeURIComponent(plan_id) + '&time=' + select_value;
+        xhr.open("POST", '/info_lists/plan_edit', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+        xhr.send(body);
+    }
+};
+
+function InputsChange(myitem){
+    var input_value = myitem.val();
+    var input_id = myitem.attr('id');
+    if (input_id.includes('select_monthly_date_period')) {
+        plan_id = input_id.slice(26); //обрезаю "select_monthly_date_period" оставляю только id в бд
+        var xhr = new XMLHttpRequest();
+        var body = 'type=' + 'change_date' + '&period=' + 'monthly' + '&plan_id=' + encodeURIComponent(plan_id) + '&date=' + input_value;
+        xhr.open("POST", '/info_lists/plan_edit', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+        xhr.send(body);
+    } else if (input_id.includes('select_quarterly_date_period')) {
+        plan_id = input_id.slice(28); //обрезаю "select_quarterly_date_period" оставляю только id в бд
+        var xhr = new XMLHttpRequest();
+        var body = 'type=' + 'change_date' + '&period=' + 'quarterly' + '&plan_id=' + encodeURIComponent(plan_id) + '&date=' + input_value;
+        xhr.open("POST", '/info_lists/plan_edit', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+        xhr.send(body);
+    } else if (input_id.includes('select_yearly_date_period')) {
+        plan_id = input_id.slice(25); //обрезаю "select_yearly_date_period" оставляю только id в бд
+        var xhr = new XMLHttpRequest();
+        var body = 'type=' + 'change_date' + '&period=' + 'yearly' + '&plan_id=' + encodeURIComponent(plan_id) + '&date=' + input_value;
+        xhr.open("POST", '/info_lists/plan_edit', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+        xhr.send(body);
+    }
+};
+
+function MarkDay(plan_id, button_num) {
+    var Plan = $('#plan' + plan_id);
+    var Button = Plan.find('#btn' + button_num);
+    Button.attr('class', 'btn btn-info');
+    Button.attr('onclick', 'UnMarkDay(' + plan_id + ', ' + button_num + ');');
+    var xhr = new XMLHttpRequest();
+    var body = 'type=' + 'change_weekly_day' + '&operation=' + 'add' + '&plan_id=' + encodeURIComponent(plan_id) + '&day_number=' + button_num;
+    xhr.open("POST", '/info_lists/plan_edit', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+    xhr.send(body);
+};
+
+function UnMarkDay(plan_id, button_num) {
+    var Plan = $('#plan' + plan_id);
+    var Button = Plan.find('#btn' + button_num);
+    Button.attr('class', 'btn btn-outline-info');
+    Button.attr('onclick', 'MarkDay(' + plan_id + ', ' + button_num + ');');
+    var xhr = new XMLHttpRequest();
+    var body = 'type=' + 'change_weekly_day' + '&operation=' + 'delete' + '&plan_id=' + encodeURIComponent(plan_id) + '&day_number=' + button_num;
+    xhr.open("POST", '/info_lists/plan_edit', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+    xhr.send(body);
+};
+
+function TimeSelect(plan_id) {
+    var plan = $('#plan' + plan_id);
+    var time_select = plan.find('select');
+    var select_id = time_select.attr('id');
+    if (select_id.includes('select_daily_time_period')) {
+
+
+    }
+};
+
+</script>
+
+{% endblock %}
+
+
+
+
+
+
+

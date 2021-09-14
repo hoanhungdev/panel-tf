@@ -1,0 +1,129 @@
+# fill db
+# docker exec db psql -U ${POSTGRES_USER} -c 'create database ${POSTGRES_DATABASE}'
+# python manage.py migrate --run-syncdb
+# python manage.py makemigrations
+# python manage.py migrate
+# python manage.py loaddata dump.json
+
+
+version: '3.7'
+services:
+  web:
+    container_name: web
+    build: ./
+    restart: always
+    command: gunicorn ${DJANGO_PROJECT_NAME}.wsgi:application --bind 0.0.0.0:8001
+    volumes:
+      - ./panel-tf/:/usr/src/panel-tf/
+    ports:
+      - 8001:8001
+    env_file:
+      - ./.env
+    depends_on:
+      - db
+    links:
+      - db:db
+    networks:
+      - djangonetwork
+    healthcheck:
+        test: ["CMD", "curl", "-f", "http://0.0.0.0:8001"]
+        interval: 12s
+        timeout: 6s
+        retries: 5
+
+  db:
+    container_name: db
+    restart: always
+    networks:
+      - djangonetwork
+    image: postgres:12.0-alpine
+    volumes:
+      - postgres:/var/lib/postgresql/data/
+    env_file:
+      - ./.env
+    ports:
+      - "5432:5432"
+    healthcheck:
+        test: ["CMD", "pg_isready -U ${POSTGRES_DATABASE}"]
+        interval: 12s
+        timeout: 6s
+        retries: 5
+
+  redis:
+    image: redis:6
+    restart: always
+    container_name: redis
+    ports:
+      - "6379:6379"
+    healthcheck:
+        test: ["CMD", "redis-cli", "ping"]
+        interval: 12s
+        timeout: 6s
+        retries: 5
+    networks:
+      - djangonetwork
+
+  celery:
+    build: .
+    restart: always
+    volumes:
+      - ./panel-tf/:/usr/src/panel-tf/
+    container_name: celery
+    command: celery -A ${DJANGO_PROJECT_NAME} worker -l info
+    env_file:
+      - ./.env
+    links:
+      - redis:redis
+    depends_on: 
+      - redis
+      - web
+    networks:
+      - djangonetwork
+
+  schedule:
+    build: .
+    restart: always
+    working_dir: /usr/src/panel-tf/panel
+    volumes:
+      - ./panel-tf/:/usr/src/panel-tf/
+    container_name: schedule
+    command: celery -A ${DJANGO_PROJECT_NAME} beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler
+    env_file:
+      - ./.env
+    links:
+      - redis:redis
+    depends_on: 
+      - redis
+      - web
+    networks:
+      - djangonetwork
+
+  flower:
+    build: .
+    restart: always
+    working_dir: /usr/src/panel-tf/panel
+    volumes:
+      - ./panel-tf/:/usr/src/panel-tf/
+    container_name: flower
+    command: flower -A ${DJANGO_PROJECT_NAME} --port=5555
+    env_file:
+      - ./.env
+    ports:
+      - "5555:5555"
+    links:
+      - redis:redis
+    depends_on: 
+      - redis
+      - web
+    networks:
+      - djangonetwork
+
+
+
+volumes:
+  postgres:
+    external: true
+
+networks:
+  djangonetwork:
+    driver: bridge

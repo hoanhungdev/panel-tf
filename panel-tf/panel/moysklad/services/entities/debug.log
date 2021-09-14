@@ -1,0 +1,1102 @@
+2020-10-05T20:49:57.086187+0300 ERROR An error has been caught in function 'start_project_by_spreadsheet_link_task', process 'ForkPoolWorker-1' (20062), thread 'MainThread' (140010358282048):
+Traceback (most recent call last):
+
+  File "/home/admin/code/panel-tf/venv/bin/celery", line 8, in <module>
+    sys.exit(main())
+    │   │    └ <function main at 0x7f56b357b8b0>
+    │   └ <function Worker.__call__.<locals>.exit at 0x7f56af5a73a0>
+    └ <module 'sys' (built-in)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/__main__.py", line 16, in main
+    _main()
+    └ <function main at 0x7f56b26fe280>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bin/celery.py", line 322, in main
+    cmd.execute_from_commandline(argv)
+    │   │                        └ None
+    │   └ <function CeleryCommand.execute_from_commandline at 0x7f56b26fe9d0>
+    └ <celery.bin.celery.CeleryCommand object at 0x7f56b35bd1c0>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bin/celery.py", line 495, in execute_from_commandline
+    super(CeleryCommand, self).execute_from_commandline(argv)))
+          │              │                              └ ['/home/admin/code/panel-tf/venv/bin/celery', '-A', 'panel', 'worker', '--loglevel=info']
+          │              └ <celery.bin.celery.CeleryCommand object at 0x7f56b35bd1c0>
+          └ <class 'celery.bin.celery.CeleryCommand'>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bin/base.py", line 305, in execute_from_commandline
+    return self.handle_argv(self.prog_name, argv[1:])
+           │    │           │    │          └ ['/home/admin/code/panel-tf/venv/bin/celery', '-A', 'panel', 'worker', '--loglevel=info']
+           │    │           │    └ 'celery'
+           │    │           └ <celery.bin.celery.CeleryCommand object at 0x7f56b35bd1c0>
+           │    └ <function CeleryCommand.handle_argv at 0x7f56b26fe940>
+           └ <celery.bin.celery.CeleryCommand object at 0x7f56b35bd1c0>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bin/celery.py", line 487, in handle_argv
+    return self.execute(command, argv)
+           │    │       │        └ ['worker', '--loglevel=info', '-A', 'panel']
+           │    │       └ 'worker'
+           │    └ <function CeleryCommand.execute at 0x7f56b26fe700>
+           └ <celery.bin.celery.CeleryCommand object at 0x7f56b35bd1c0>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bin/celery.py", line 415, in execute
+    return cls(
+           └ <class 'celery.bin.worker.worker'>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bin/worker.py", line 223, in run_from_argv
+    return self(*args, **options)
+           │     │       └ {'app': 'panel', 'broker': None, 'result_backend': None, 'loader': None, 'config': None, 'workdir': None, 'no_color': None, '...
+           │     └ []
+           └ <celery.bin.worker.worker object at 0x7f56b34baf40>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bin/base.py", line 253, in __call__
+    ret = self.run(*args, **kwargs)
+          │    │    │       └ {'app': 'panel', 'broker': None, 'result_backend': None, 'loader': None, 'config': None, 'workdir': None, 'no_color': None, '...
+          │    │    └ ()
+          │    └ <function worker.run at 0x7f56b26fe0d0>
+          └ <celery.bin.worker.worker object at 0x7f56b34baf40>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bin/worker.py", line 259, in run
+    worker.start()
+    │      └ <function WorkController.start at 0x7f56b2de6820>
+    └ <Worker: celery@panel-tf (running)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/worker/worker.py", line 205, in start
+    self.blueprint.start(self)
+    │    │         │     └ <Worker: celery@panel-tf (running)>
+    │    │         └ <function Blueprint.start at 0x7f56b2dc7c10>
+    │    └ <celery.worker.worker.WorkController.Blueprint object at 0x7f56af5fe2e0>
+    └ <Worker: celery@panel-tf (running)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bootsteps.py", line 119, in start
+    step.start(parent)
+    │    │     └ <Worker: celery@panel-tf (running)>
+    │    └ <function StartStopStep.start at 0x7f56b2ddf820>
+    └ <step: Pool>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bootsteps.py", line 369, in start
+    return self.obj.start()
+           │    │   └ <function BasePool.start at 0x7f56af786310>
+           │    └ <celery.concurrency.prefork.TaskPool object at 0x7f56af60ba90>
+           └ <step: Pool>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/concurrency/base.py", line 132, in start
+    self.on_start()
+    │    └ <function TaskPool.on_start at 0x7f56af5ff160>
+    └ <celery.concurrency.prefork.TaskPool object at 0x7f56af60ba90>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/concurrency/prefork.py", line 111, in on_start
+    P = self._pool = Pool(processes=self.limit,
+        │    │       │              │    └ 2
+        │    │       │              └ <celery.concurrency.prefork.TaskPool object at 0x7f56af60ba90>
+        │    │       └ <class 'celery.concurrency.asynpool.AsynPool'>
+        │    └ None
+        └ <celery.concurrency.prefork.TaskPool object at 0x7f56af60ba90>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/concurrency/asynpool.py", line 486, in __init__
+    super(AsynPool, self).__init__(processes, *args, **kwargs)
+          │         │              │           │       └ {'initializer': <function process_initializer at 0x7f56af742ca0>, 'on_process_exit': <function process_destructor at 0x7f56af...
+          │         │              │           └ ()
+          │         │              └ 2
+          │         └ <celery.concurrency.asynpool.AsynPool object at 0x7f56af57ae20>
+          └ <class 'celery.concurrency.asynpool.AsynPool'>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/pool.py", line 1046, in __init__
+    self._create_worker_process(i)
+    │    │                      └ 0
+    │    └ <function AsynPool._create_worker_process at 0x7f56af5fad30>
+    └ <celery.concurrency.asynpool.AsynPool object at 0x7f56af57ae20>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/concurrency/asynpool.py", line 503, in _create_worker_process
+    return super(AsynPool, self)._create_worker_process(i)
+                 │         │                            └ 0
+                 │         └ <celery.concurrency.asynpool.AsynPool object at 0x7f56af57ae20>
+                 └ <class 'celery.concurrency.asynpool.AsynPool'>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/pool.py", line 1158, in _create_worker_process
+    w.start()
+    │ └ <function BaseProcess.start at 0x7f56b2f88ee0>
+    └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/process.py", line 124, in start
+    self._popen = self._Popen(self)
+    │    │        │    │      └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+    │    │        │    └ <staticmethod object at 0x7f56b3061c40>
+    │    │        └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+    │    └ None
+    └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/context.py", line 333, in _Popen
+    return Popen(process_obj)
+           │     └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+           └ <class 'billiard.popen_fork.Popen'>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/popen_fork.py", line 24, in __init__
+    self._launch(process_obj)
+    │    │       └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+    │    └ <function Popen._launch at 0x7f56af5b4280>
+    └ <billiard.popen_fork.Popen object at 0x7f56af596c40>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/popen_fork.py", line 79, in _launch
+    code = process_obj._bootstrap()
+           │           └ <function BaseProcess._bootstrap at 0x7f56b2ec6b80>
+           └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/process.py", line 327, in _bootstrap
+    self.run()
+    │    └ <function BaseProcess.run at 0x7f56b2f88e50>
+    └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/process.py", line 114, in run
+    self._target(*self._args, **self._kwargs)
+    │    │        │    │        │    └ {}
+    │    │        │    │        └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+    │    │        │    └ ()
+    │    │        └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+    │    └ <celery.concurrency.asynpool.Worker object at 0x7f56af596be0>
+    └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/pool.py", line 292, in __call__
+    sys.exit(self.workloop(pid=pid))
+    │   │    │    │            └ 20062
+    │   │    │    └ <function Worker.workloop at 0x7f56af7adca0>
+    │   │    └ <celery.concurrency.asynpool.Worker object at 0x7f56af596be0>
+    │   └ <function Worker.__call__.<locals>.exit at 0x7f56af5a73a0>
+    └ <module 'sys' (built-in)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/pool.py", line 362, in workloop
+    result = (True, prepare_result(fun(*args, **kwargs)))
+                    │              │    │       └ {}
+                    │              │    └ ('start_project.tasks.start_project_by_spreadsheet_link_task', '803bb9ce-8603-4c2e-ba5f-d8fa8043c5a9', {'lang': 'py', 'task':...
+                    │              └ <function _fast_trace_task at 0x7f56b2dbc310>
+                    └ <bound method Worker.prepare_result of <celery.concurrency.asynpool.Worker object at 0x7f56af596be0>>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/app/trace.py", line 557, in _fast_trace_task
+    R, I, T, Rstr = tasks[task].__trace__(
+                    │     └ 'start_project.tasks.start_project_by_spreadsheet_link_task'
+                    └ {'celery.chain': <@task: celery.chain of panel at 0x7f56b1d4f4c0>, 'celery.backend_cleanup': <@task: celery.backend_cleanup o...
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/app/trace.py", line 385, in trace_task
+    R = retval = fun(*args, **kwargs)
+                 │    │       └ {}
+                 │    └ []
+                 └ <@task: start_project.tasks.start_project_by_spreadsheet_link_task of panel at 0x7f56b1d4f4c0>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/app/trace.py", line 650, in __protected_call__
+    return self.run(*args, **kwargs)
+           │    │    │       └ {}
+           │    │    └ ()
+           │    └ <staticmethod object at 0x7f56af7023a0>
+           └ <@task: start_project.tasks.start_project_by_spreadsheet_link_task of panel at 0x7f56b1d4f4c0>
+
+> File "/home/admin/code/panel-tf/panel/start_project/tasks.py", line 13, in start_project_by_spreadsheet_link_task
+    start_project_by_spreadsheet_link()
+    └ <function start_project_by_spreadsheet_link at 0x7f56af812ee0>
+
+  File "/home/admin/code/panel-tf/panel/start_project/services/main.py", line 34, in start_project_by_spreadsheet_link
+    deal = _get_deal()
+           └ <function _get_deal at 0x7f56af704b80>
+
+  File "/home/admin/code/panel-tf/panel/start_project/services/main.py", line 92, in _get_deal
+    raise Exception('Нет сделки!')
+
+Exception: Нет сделки!
+2020-10-05T20:52:24.859300+0300 ERROR An error has been caught in function 'start', process 'ForkPoolWorker-1' (20062), thread 'MainThread' (140010358282048):
+Traceback (most recent call last):
+
+  File "/home/admin/code/panel-tf/venv/bin/celery", line 8, in <module>
+    sys.exit(main())
+    │   │    └ <function main at 0x7f56b357b8b0>
+    │   └ <function Worker.__call__.<locals>.exit at 0x7f56af5a73a0>
+    └ <module 'sys' (built-in)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/__main__.py", line 16, in main
+    _main()
+    └ <function main at 0x7f56b26fe280>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bin/celery.py", line 322, in main
+    cmd.execute_from_commandline(argv)
+    │   │                        └ None
+    │   └ <function CeleryCommand.execute_from_commandline at 0x7f56b26fe9d0>
+    └ <celery.bin.celery.CeleryCommand object at 0x7f56b35bd1c0>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bin/celery.py", line 495, in execute_from_commandline
+    super(CeleryCommand, self).execute_from_commandline(argv)))
+          │              │                              └ ['/home/admin/code/panel-tf/venv/bin/celery', '-A', 'panel', 'worker', '--loglevel=info']
+          │              └ <celery.bin.celery.CeleryCommand object at 0x7f56b35bd1c0>
+          └ <class 'celery.bin.celery.CeleryCommand'>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bin/base.py", line 305, in execute_from_commandline
+    return self.handle_argv(self.prog_name, argv[1:])
+           │    │           │    │          └ ['/home/admin/code/panel-tf/venv/bin/celery', '-A', 'panel', 'worker', '--loglevel=info']
+           │    │           │    └ 'celery'
+           │    │           └ <celery.bin.celery.CeleryCommand object at 0x7f56b35bd1c0>
+           │    └ <function CeleryCommand.handle_argv at 0x7f56b26fe940>
+           └ <celery.bin.celery.CeleryCommand object at 0x7f56b35bd1c0>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bin/celery.py", line 487, in handle_argv
+    return self.execute(command, argv)
+           │    │       │        └ ['worker', '--loglevel=info', '-A', 'panel']
+           │    │       └ 'worker'
+           │    └ <function CeleryCommand.execute at 0x7f56b26fe700>
+           └ <celery.bin.celery.CeleryCommand object at 0x7f56b35bd1c0>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bin/celery.py", line 415, in execute
+    return cls(
+           └ <class 'celery.bin.worker.worker'>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bin/worker.py", line 223, in run_from_argv
+    return self(*args, **options)
+           │     │       └ {'app': 'panel', 'broker': None, 'result_backend': None, 'loader': None, 'config': None, 'workdir': None, 'no_color': None, '...
+           │     └ []
+           └ <celery.bin.worker.worker object at 0x7f56b34baf40>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bin/base.py", line 253, in __call__
+    ret = self.run(*args, **kwargs)
+          │    │    │       └ {'app': 'panel', 'broker': None, 'result_backend': None, 'loader': None, 'config': None, 'workdir': None, 'no_color': None, '...
+          │    │    └ ()
+          │    └ <function worker.run at 0x7f56b26fe0d0>
+          └ <celery.bin.worker.worker object at 0x7f56b34baf40>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bin/worker.py", line 259, in run
+    worker.start()
+    │      └ <function WorkController.start at 0x7f56b2de6820>
+    └ <Worker: celery@panel-tf (running)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/worker/worker.py", line 205, in start
+    self.blueprint.start(self)
+    │    │         │     └ <Worker: celery@panel-tf (running)>
+    │    │         └ <function Blueprint.start at 0x7f56b2dc7c10>
+    │    └ <celery.worker.worker.WorkController.Blueprint object at 0x7f56af5fe2e0>
+    └ <Worker: celery@panel-tf (running)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bootsteps.py", line 119, in start
+    step.start(parent)
+    │    │     └ <Worker: celery@panel-tf (running)>
+    │    └ <function StartStopStep.start at 0x7f56b2ddf820>
+    └ <step: Pool>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bootsteps.py", line 369, in start
+    return self.obj.start()
+           │    │   └ <function BasePool.start at 0x7f56af786310>
+           │    └ <celery.concurrency.prefork.TaskPool object at 0x7f56af60ba90>
+           └ <step: Pool>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/concurrency/base.py", line 132, in start
+    self.on_start()
+    │    └ <function TaskPool.on_start at 0x7f56af5ff160>
+    └ <celery.concurrency.prefork.TaskPool object at 0x7f56af60ba90>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/concurrency/prefork.py", line 111, in on_start
+    P = self._pool = Pool(processes=self.limit,
+        │    │       │              │    └ 2
+        │    │       │              └ <celery.concurrency.prefork.TaskPool object at 0x7f56af60ba90>
+        │    │       └ <class 'celery.concurrency.asynpool.AsynPool'>
+        │    └ None
+        └ <celery.concurrency.prefork.TaskPool object at 0x7f56af60ba90>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/concurrency/asynpool.py", line 486, in __init__
+    super(AsynPool, self).__init__(processes, *args, **kwargs)
+          │         │              │           │       └ {'initializer': <function process_initializer at 0x7f56af742ca0>, 'on_process_exit': <function process_destructor at 0x7f56af...
+          │         │              │           └ ()
+          │         │              └ 2
+          │         └ <celery.concurrency.asynpool.AsynPool object at 0x7f56af57ae20>
+          └ <class 'celery.concurrency.asynpool.AsynPool'>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/pool.py", line 1046, in __init__
+    self._create_worker_process(i)
+    │    │                      └ 0
+    │    └ <function AsynPool._create_worker_process at 0x7f56af5fad30>
+    └ <celery.concurrency.asynpool.AsynPool object at 0x7f56af57ae20>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/concurrency/asynpool.py", line 503, in _create_worker_process
+    return super(AsynPool, self)._create_worker_process(i)
+                 │         │                            └ 0
+                 │         └ <celery.concurrency.asynpool.AsynPool object at 0x7f56af57ae20>
+                 └ <class 'celery.concurrency.asynpool.AsynPool'>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/pool.py", line 1158, in _create_worker_process
+    w.start()
+    │ └ <function BaseProcess.start at 0x7f56b2f88ee0>
+    └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/process.py", line 124, in start
+    self._popen = self._Popen(self)
+    │    │        │    │      └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+    │    │        │    └ <staticmethod object at 0x7f56b3061c40>
+    │    │        └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+    │    └ None
+    └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/context.py", line 333, in _Popen
+    return Popen(process_obj)
+           │     └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+           └ <class 'billiard.popen_fork.Popen'>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/popen_fork.py", line 24, in __init__
+    self._launch(process_obj)
+    │    │       └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+    │    └ <function Popen._launch at 0x7f56af5b4280>
+    └ <billiard.popen_fork.Popen object at 0x7f56af596c40>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/popen_fork.py", line 79, in _launch
+    code = process_obj._bootstrap()
+           │           └ <function BaseProcess._bootstrap at 0x7f56b2ec6b80>
+           └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/process.py", line 327, in _bootstrap
+    self.run()
+    │    └ <function BaseProcess.run at 0x7f56b2f88e50>
+    └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/process.py", line 114, in run
+    self._target(*self._args, **self._kwargs)
+    │    │        │    │        │    └ {}
+    │    │        │    │        └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+    │    │        │    └ ()
+    │    │        └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+    │    └ <celery.concurrency.asynpool.Worker object at 0x7f56af596be0>
+    └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/pool.py", line 292, in __call__
+    sys.exit(self.workloop(pid=pid))
+    │   │    │    │            └ 20062
+    │   │    │    └ <function Worker.workloop at 0x7f56af7adca0>
+    │   │    └ <celery.concurrency.asynpool.Worker object at 0x7f56af596be0>
+    │   └ <function Worker.__call__.<locals>.exit at 0x7f56af5a73a0>
+    └ <module 'sys' (built-in)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/pool.py", line 362, in workloop
+    result = (True, prepare_result(fun(*args, **kwargs)))
+                    │              │    │       └ {}
+                    │              │    └ ('start_project.tasks.start_project_by_spreadsheet_link_task', '1153b51d-333e-40b3-a396-2998f4fca56c', {'lang': 'py', 'task':...
+                    │              └ <function _fast_trace_task at 0x7f56b2dbc310>
+                    └ <bound method Worker.prepare_result of <celery.concurrency.asynpool.Worker object at 0x7f56af596be0>>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/app/trace.py", line 557, in _fast_trace_task
+    R, I, T, Rstr = tasks[task].__trace__(
+                    │     └ 'start_project.tasks.start_project_by_spreadsheet_link_task'
+                    └ {'celery.chain': <@task: celery.chain of panel at 0x7f56b1d4f4c0>, 'celery.backend_cleanup': <@task: celery.backend_cleanup o...
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/app/trace.py", line 385, in trace_task
+    R = retval = fun(*args, **kwargs)
+                 │    │       └ {}
+                 │    └ []
+                 └ <@task: start_project.tasks.start_project_by_spreadsheet_link_task of panel at 0x7f56b1d4f4c0>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/app/trace.py", line 650, in __protected_call__
+    return self.run(*args, **kwargs)
+           │    │    │       └ {}
+           │    │    └ ()
+           │    └ <staticmethod object at 0x7f56af7023a0>
+           └ <@task: start_project.tasks.start_project_by_spreadsheet_link_task of panel at 0x7f56b1d4f4c0>
+
+  File "/home/admin/code/panel-tf/panel/start_project/tasks.py", line 13, in start_project_by_spreadsheet_link_task
+    start_project_by_spreadsheet_link()
+    └ <function start_project_by_spreadsheet_link at 0x7f56af812ee0>
+
+  File "/home/admin/code/panel-tf/panel/start_project/services/main.py", line 35, in start_project_by_spreadsheet_link
+    return start(deal)
+           │     └ {'ID': '7031', 'TITLE': 'тест фк крд', 'TYPE_ID': 'SALE', 'STAGE_ID': '10', 'PROBABILITY': None, 'CURRENCY_ID': 'RUB', 'OPPOR...
+           └ <function start at 0x7f56af704ca0>
+
+> File "/home/admin/code/panel-tf/panel/start_project/services/main.py", line 374, in start
+    new_supply = create_document(
+                 └ <function create_document at 0x7f56b0334700>
+
+  File "/home/admin/code/panel-tf/panel/moysklad/services/entities/base.py", line 21, in create_document
+    response = _post(url=url, body=body)
+               │         │         └ {'accountId': 'c7c055ba-7c85-11e5-90a2-8ecb000043b0', 'owner': {'meta': {'href': 'https://online.moysklad.ru/api/remap/1.2/en...
+               │         └ 'https://online.moysklad.ru/api/remap/1.2/entity/supply'
+               └ <function _post at 0x7f56b0334c10>
+
+  File "/home/admin/code/panel-tf/panel/moysklad/services/entities/base.py", line 92, in _post
+    raise MoyskladException(r.text, url, body)
+          │                 │ │     │    └ {'accountId': 'c7c055ba-7c85-11e5-90a2-8ecb000043b0', 'owner': {'meta': {'href': 'https://online.moysklad.ru/api/remap/1.2/en...
+          │                 │ │     └ 'https://online.moysklad.ru/api/remap/1.2/entity/supply'
+          │                 │ └ <property object at 0x7f56b0381720>
+          │                 └ <Response [412]>
+          └ <class 'moysklad.services.base.MoyskladException'>
+
+moysklad.services.base.MoyskladException: ('{\n  "errors" : [ {\n    "error" : "Ошибка сохранения объекта: поле \'agent\' не может быть пустым или отсутствовать",\n    "code" : 3000,\n    "parameter" : "agent",\n    "moreInfo" : "https://online.moysklad.ru/api/remap/1.2/doc#обработка-ошибок-3000",\n    "line" : 1,\n    "column" : 3522\n  }, {\n    "error" : "Ошибка сохранения объекта: поле \'organization\' не может быть пустым или отсутствовать",\n    "code" : 3000,\n    "parameter" : "organization",\n    "moreInfo" : "https://online.moysklad.ru/api/remap/1.2/doc#обработка-ошибок-3000",\n    "line" : 1,\n    "column" : 3522\n  } ]\n}', 'https://online.moysklad.ru/api/remap/1.2/entity/supply', {'accountId': 'c7c055ba-7c85-11e5-90a2-8ecb000043b0', 'owner': {'meta': {'href': 'https://online.moysklad.ru/api/remap/1.2/entity/employee/c6f72b9b-7c85-11e5-7a40-e897002c7305', 'metadataHref': 'https://online.moysklad.ru/api/remap/1.2/entity/employee/metadata', 'type': 'employee', 'mediaType': 'application/json', 'uuidHref': 'https://online.moysklad.ru/app/#employee/edit?id=c6f72b9b-7c85-11e5-7a40-e897002c7305'}}, 'shared': False, 'group': {'meta': {'href': 'https://online.moysklad.ru/api/remap/1.2/entity/group/c7c0dfad-7c85-11e5-90a2-8ecb000043b1', 'metadataHref': 'https://online.moysklad.ru/api/remap/1.2/entity/group/metadata', 'type': 'group', 'mediaType': 'application/json'}}, 'updated': '2020-10-05 00:56:07.531', 'externalCode': '8qyZ6w4FhhLiDJnJNLO403', 'applicable': False, 'rate': {'currency': {'meta': {'href': 'https://online.moysklad.ru/api/remap/1.2/entity/currency/c702d53c-7c85-11e5-7a40-e897002c7333', 'metadataHref': 'https://online.moysklad.ru/api/remap/1.2/entity/currency/metadata', 'type': 'currency', 'mediaType': 'application/json', 'uuidHref': 'https://online.moysklad.ru/app/#currency/edit?id=c702d53c-7c85-11e5-7a40-e897002c7333'}}}, 'sum': 100.0, 'store': {'meta': {'href': 'https://online.moysklad.ru/api/remap/1.2/entity/store/b1f58ce8-80e8-11e6-7a69-8f5500104e6a', 'metadataHref': 'https://online.moysklad.ru/api/remap/1.2/entity/store/metadata', 'type': 'store', 'mediaType': 'application/json', 'uuidHref': 'https://online.moysklad.ru/app/#warehouse/edit?id=b1f58ce8-80e8-11e6-7a69-8f5500104e6a'}}, 'project': {'meta': {'href': 'https://online.moysklad.ru/api/remap/1.2/entity/project/ea69fc17-1389-11ea-0a80-064d0012f420', 'metadataHref': 'https://online.moysklad.ru/api/remap/1.2/entity/project/metadata', 'type': 'project', 'mediaType': 'application/json', 'uuidHref': 'https://online.moysklad.ru/app/#project/edit?id=ea69fc17-1389-11ea-0a80-064d0012f420'}}, 'agent': {'meta': {'href': 'https://online.moysklad.ru/api/remap/1.2/entity/counterparty/4eff5b23-03c2-11ea-0a80-06cf000845fd', 'metadataHref': 'https://online.moysklad.ru/api/remap/1.2/entity/counterparty/metadata', 'type': 'counterparty', 'mediaType': 'application/json', 'uuidHref': 'https://online.moysklad.ru/app/#company/edit?id=4eff5b23-03c2-11ea-0a80-06cf000845fd'}}, 'organization': {'meta': {'href': 'https://online.moysklad.ru/api/remap/1.2/entity/organization/b66837ad-d66c-11e6-7a69-9711004b5836', 'metadataHref': 'https://online.moysklad.ru/api/remap/1.2/entity/organization/metadata', 'type': 'organization', 'mediaType': 'application/json', 'uuidHref': 'https://online.moysklad.ru/app/#mycompany/edit?id=b66837ad-d66c-11e6-7a69-9711004b5836'}}, 'state': {'meta': {'href': 'https://online.moysklad.ru/api/remap/1.2/entity/supply/metadata/states/8c19155b-3f70-11e6-7a69-93a70004f499', 'metadataHref': 'https://online.moysklad.ru/api/remap/1.2/entity/supply/metadata', 'type': 'state', 'mediaType': 'application/json'}}, 'created': '2020-10-05 00:56:07.674', 'files': {'meta': {'href': 'https://online.moysklad.ru/api/remap/1.2/entity/supply/68156c18-068c-11eb-0a80-0995001ce3e2/files', 'type': 'files', 'mediaType': 'application/json', 'size': 0, 'limit': 1000, 'offset': 0}}, 'positions': {'meta': {'href': 'https://online.moysklad.ru/api/remap/1.2/entity/supply/68156c18-068c-11eb-0a80-0995001ce3e2/positions', 'type': 'supplyposition', 'mediaType': 'application/json', 'size': 1, 'limit': 1000, 'offset': 0}}, 'vatEnabled': True, 'vatIncluded': True, 'vatSum': 17.0, 'payedSum': 0.0, 'invoicesIn': [{'href': 'https://online.moysklad.ru/api/remap/1.2/entity/invoicein/868c2717-0733-11eb-0a80-05e90000630f', 'metadataHref': 'https://online.moysklad.ru/api/remap/1.2/entity/invoicein/metadata', 'type': 'invoicein', 'mediaType': 'application/json', 'uuidHref': 'https://online.moysklad.ru/app/#invoicein/edit?id=868c2717-0733-11eb-0a80-05e90000630f'}]})
+2020-10-05T20:52:29.830451+0300 ERROR An error has been caught in function 'start', process 'ForkPoolWorker-1' (20062), thread 'MainThread' (140010358282048):
+Traceback (most recent call last):
+
+  File "/home/admin/code/panel-tf/venv/bin/celery", line 8, in <module>
+    sys.exit(main())
+    │   │    └ <function main at 0x7f56b357b8b0>
+    │   └ <function Worker.__call__.<locals>.exit at 0x7f56af5a73a0>
+    └ <module 'sys' (built-in)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/__main__.py", line 16, in main
+    _main()
+    └ <function main at 0x7f56b26fe280>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bin/celery.py", line 322, in main
+    cmd.execute_from_commandline(argv)
+    │   │                        └ None
+    │   └ <function CeleryCommand.execute_from_commandline at 0x7f56b26fe9d0>
+    └ <celery.bin.celery.CeleryCommand object at 0x7f56b35bd1c0>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bin/celery.py", line 495, in execute_from_commandline
+    super(CeleryCommand, self).execute_from_commandline(argv)))
+          │              │                              └ ['/home/admin/code/panel-tf/venv/bin/celery', '-A', 'panel', 'worker', '--loglevel=info']
+          │              └ <celery.bin.celery.CeleryCommand object at 0x7f56b35bd1c0>
+          └ <class 'celery.bin.celery.CeleryCommand'>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bin/base.py", line 305, in execute_from_commandline
+    return self.handle_argv(self.prog_name, argv[1:])
+           │    │           │    │          └ ['/home/admin/code/panel-tf/venv/bin/celery', '-A', 'panel', 'worker', '--loglevel=info']
+           │    │           │    └ 'celery'
+           │    │           └ <celery.bin.celery.CeleryCommand object at 0x7f56b35bd1c0>
+           │    └ <function CeleryCommand.handle_argv at 0x7f56b26fe940>
+           └ <celery.bin.celery.CeleryCommand object at 0x7f56b35bd1c0>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bin/celery.py", line 487, in handle_argv
+    return self.execute(command, argv)
+           │    │       │        └ ['worker', '--loglevel=info', '-A', 'panel']
+           │    │       └ 'worker'
+           │    └ <function CeleryCommand.execute at 0x7f56b26fe700>
+           └ <celery.bin.celery.CeleryCommand object at 0x7f56b35bd1c0>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bin/celery.py", line 415, in execute
+    return cls(
+           └ <class 'celery.bin.worker.worker'>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bin/worker.py", line 223, in run_from_argv
+    return self(*args, **options)
+           │     │       └ {'app': 'panel', 'broker': None, 'result_backend': None, 'loader': None, 'config': None, 'workdir': None, 'no_color': None, '...
+           │     └ []
+           └ <celery.bin.worker.worker object at 0x7f56b34baf40>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bin/base.py", line 253, in __call__
+    ret = self.run(*args, **kwargs)
+          │    │    │       └ {'app': 'panel', 'broker': None, 'result_backend': None, 'loader': None, 'config': None, 'workdir': None, 'no_color': None, '...
+          │    │    └ ()
+          │    └ <function worker.run at 0x7f56b26fe0d0>
+          └ <celery.bin.worker.worker object at 0x7f56b34baf40>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bin/worker.py", line 259, in run
+    worker.start()
+    │      └ <function WorkController.start at 0x7f56b2de6820>
+    └ <Worker: celery@panel-tf (running)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/worker/worker.py", line 205, in start
+    self.blueprint.start(self)
+    │    │         │     └ <Worker: celery@panel-tf (running)>
+    │    │         └ <function Blueprint.start at 0x7f56b2dc7c10>
+    │    └ <celery.worker.worker.WorkController.Blueprint object at 0x7f56af5fe2e0>
+    └ <Worker: celery@panel-tf (running)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bootsteps.py", line 119, in start
+    step.start(parent)
+    │    │     └ <Worker: celery@panel-tf (running)>
+    │    └ <function StartStopStep.start at 0x7f56b2ddf820>
+    └ <step: Pool>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bootsteps.py", line 369, in start
+    return self.obj.start()
+           │    │   └ <function BasePool.start at 0x7f56af786310>
+           │    └ <celery.concurrency.prefork.TaskPool object at 0x7f56af60ba90>
+           └ <step: Pool>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/concurrency/base.py", line 132, in start
+    self.on_start()
+    │    └ <function TaskPool.on_start at 0x7f56af5ff160>
+    └ <celery.concurrency.prefork.TaskPool object at 0x7f56af60ba90>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/concurrency/prefork.py", line 111, in on_start
+    P = self._pool = Pool(processes=self.limit,
+        │    │       │              │    └ 2
+        │    │       │              └ <celery.concurrency.prefork.TaskPool object at 0x7f56af60ba90>
+        │    │       └ <class 'celery.concurrency.asynpool.AsynPool'>
+        │    └ None
+        └ <celery.concurrency.prefork.TaskPool object at 0x7f56af60ba90>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/concurrency/asynpool.py", line 486, in __init__
+    super(AsynPool, self).__init__(processes, *args, **kwargs)
+          │         │              │           │       └ {'initializer': <function process_initializer at 0x7f56af742ca0>, 'on_process_exit': <function process_destructor at 0x7f56af...
+          │         │              │           └ ()
+          │         │              └ 2
+          │         └ <celery.concurrency.asynpool.AsynPool object at 0x7f56af57ae20>
+          └ <class 'celery.concurrency.asynpool.AsynPool'>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/pool.py", line 1046, in __init__
+    self._create_worker_process(i)
+    │    │                      └ 0
+    │    └ <function AsynPool._create_worker_process at 0x7f56af5fad30>
+    └ <celery.concurrency.asynpool.AsynPool object at 0x7f56af57ae20>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/concurrency/asynpool.py", line 503, in _create_worker_process
+    return super(AsynPool, self)._create_worker_process(i)
+                 │         │                            └ 0
+                 │         └ <celery.concurrency.asynpool.AsynPool object at 0x7f56af57ae20>
+                 └ <class 'celery.concurrency.asynpool.AsynPool'>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/pool.py", line 1158, in _create_worker_process
+    w.start()
+    │ └ <function BaseProcess.start at 0x7f56b2f88ee0>
+    └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/process.py", line 124, in start
+    self._popen = self._Popen(self)
+    │    │        │    │      └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+    │    │        │    └ <staticmethod object at 0x7f56b3061c40>
+    │    │        └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+    │    └ None
+    └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/context.py", line 333, in _Popen
+    return Popen(process_obj)
+           │     └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+           └ <class 'billiard.popen_fork.Popen'>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/popen_fork.py", line 24, in __init__
+    self._launch(process_obj)
+    │    │       └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+    │    └ <function Popen._launch at 0x7f56af5b4280>
+    └ <billiard.popen_fork.Popen object at 0x7f56af596c40>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/popen_fork.py", line 79, in _launch
+    code = process_obj._bootstrap()
+           │           └ <function BaseProcess._bootstrap at 0x7f56b2ec6b80>
+           └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/process.py", line 327, in _bootstrap
+    self.run()
+    │    └ <function BaseProcess.run at 0x7f56b2f88e50>
+    └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/process.py", line 114, in run
+    self._target(*self._args, **self._kwargs)
+    │    │        │    │        │    └ {}
+    │    │        │    │        └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+    │    │        │    └ ()
+    │    │        └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+    │    └ <celery.concurrency.asynpool.Worker object at 0x7f56af596be0>
+    └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/pool.py", line 292, in __call__
+    sys.exit(self.workloop(pid=pid))
+    │   │    │    │            └ 20062
+    │   │    │    └ <function Worker.workloop at 0x7f56af7adca0>
+    │   │    └ <celery.concurrency.asynpool.Worker object at 0x7f56af596be0>
+    │   └ <function Worker.__call__.<locals>.exit at 0x7f56af5a73a0>
+    └ <module 'sys' (built-in)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/pool.py", line 362, in workloop
+    result = (True, prepare_result(fun(*args, **kwargs)))
+                    │              │    │       └ {}
+                    │              │    └ ('start_project.tasks.start_project_by_spreadsheet_link_task', '1153b51d-333e-40b3-a396-2998f4fca56c', {'lang': 'py', 'task':...
+                    │              └ <function _fast_trace_task at 0x7f56b2dbc310>
+                    └ <bound method Worker.prepare_result of <celery.concurrency.asynpool.Worker object at 0x7f56af596be0>>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/app/trace.py", line 557, in _fast_trace_task
+    R, I, T, Rstr = tasks[task].__trace__(
+                    │     └ 'start_project.tasks.start_project_by_spreadsheet_link_task'
+                    └ {'celery.chain': <@task: celery.chain of panel at 0x7f56b1d4f4c0>, 'celery.backend_cleanup': <@task: celery.backend_cleanup o...
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/app/trace.py", line 385, in trace_task
+    R = retval = fun(*args, **kwargs)
+                 │    │       └ {}
+                 │    └ []
+                 └ <@task: start_project.tasks.start_project_by_spreadsheet_link_task of panel at 0x7f56b1d4f4c0>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/app/trace.py", line 650, in __protected_call__
+    return self.run(*args, **kwargs)
+           │    │    │       └ {}
+           │    │    └ ()
+           │    └ <staticmethod object at 0x7f56af7023a0>
+           └ <@task: start_project.tasks.start_project_by_spreadsheet_link_task of panel at 0x7f56b1d4f4c0>
+
+  File "/home/admin/code/panel-tf/panel/start_project/tasks.py", line 13, in start_project_by_spreadsheet_link_task
+    start_project_by_spreadsheet_link()
+    └ <function start_project_by_spreadsheet_link at 0x7f56af812ee0>
+
+  File "/home/admin/code/panel-tf/panel/start_project/services/main.py", line 35, in start_project_by_spreadsheet_link
+    return start(deal)
+           │     └ {'ID': '7031', 'TITLE': 'тест фк крд', 'TYPE_ID': 'SALE', 'STAGE_ID': '10', 'PROBABILITY': None, 'CURRENCY_ID': 'RUB', 'OPPOR...
+           └ <function start at 0x7f56af704ca0>
+
+> File "/home/admin/code/panel-tf/panel/start_project/services/main.py", line 374, in start
+    new_supply = create_document(
+                 └ <function create_document at 0x7f56b0334700>
+
+  File "/home/admin/code/panel-tf/panel/moysklad/services/entities/base.py", line 21, in create_document
+    response = _post(url=url, body=body)
+               │         │         └ {'accountId': 'c7c055ba-7c85-11e5-90a2-8ecb000043b0', 'owner': {'meta': {'href': 'https://online.moysklad.ru/api/remap/1.2/en...
+               │         └ 'https://online.moysklad.ru/api/remap/1.2/entity/supply'
+               └ <function _post at 0x7f56b0334c10>
+
+  File "/home/admin/code/panel-tf/panel/moysklad/services/entities/base.py", line 92, in _post
+    raise MoyskladException(r.text, url, body)
+          │                 │ │     │    └ {'accountId': 'c7c055ba-7c85-11e5-90a2-8ecb000043b0', 'owner': {'meta': {'href': 'https://online.moysklad.ru/api/remap/1.2/en...
+          │                 │ │     └ 'https://online.moysklad.ru/api/remap/1.2/entity/supply'
+          │                 │ └ <property object at 0x7f56b0381720>
+          │                 └ <Response [412]>
+          └ <class 'moysklad.services.base.MoyskladException'>
+
+moysklad.services.base.MoyskladException: ('{\n  "errors" : [ {\n    "error" : "Ошибка сохранения объекта: поле \'agent\' не может быть пустым или отсутствовать",\n    "code" : 3000,\n    "parameter" : "agent",\n    "moreInfo" : "https://online.moysklad.ru/api/remap/1.2/doc#обработка-ошибок-3000",\n    "line" : 1,\n    "column" : 3521\n  }, {\n    "error" : "Ошибка сохранения объекта: поле \'organization\' не может быть пустым или отсутствовать",\n    "code" : 3000,\n    "parameter" : "organization",\n    "moreInfo" : "https://online.moysklad.ru/api/remap/1.2/doc#обработка-ошибок-3000",\n    "line" : 1,\n    "column" : 3521\n  } ]\n}', 'https://online.moysklad.ru/api/remap/1.2/entity/supply', {'accountId': 'c7c055ba-7c85-11e5-90a2-8ecb000043b0', 'owner': {'meta': {'href': 'https://online.moysklad.ru/api/remap/1.2/entity/employee/c6f72b9b-7c85-11e5-7a40-e897002c7305', 'metadataHref': 'https://online.moysklad.ru/api/remap/1.2/entity/employee/metadata', 'type': 'employee', 'mediaType': 'application/json', 'uuidHref': 'https://online.moysklad.ru/app/#employee/edit?id=c6f72b9b-7c85-11e5-7a40-e897002c7305'}}, 'shared': False, 'group': {'meta': {'href': 'https://online.moysklad.ru/api/remap/1.2/entity/group/c7c0dfad-7c85-11e5-90a2-8ecb000043b1', 'metadataHref': 'https://online.moysklad.ru/api/remap/1.2/entity/group/metadata', 'type': 'group', 'mediaType': 'application/json'}}, 'updated': '2020-10-05 00:59:17.873', 'externalCode': 'I4KaBrZZh6QZMZ90hII273', 'applicable': False, 'rate': {'currency': {'meta': {'href': 'https://online.moysklad.ru/api/remap/1.2/entity/currency/c702d53c-7c85-11e5-7a40-e897002c7333', 'metadataHref': 'https://online.moysklad.ru/api/remap/1.2/entity/currency/metadata', 'type': 'currency', 'mediaType': 'application/json', 'uuidHref': 'https://online.moysklad.ru/app/#currency/edit?id=c702d53c-7c85-11e5-7a40-e897002c7333'}}}, 'sum': 100.0, 'store': {'meta': {'href': 'https://online.moysklad.ru/api/remap/1.2/entity/store/b1f58ce8-80e8-11e6-7a69-8f5500104e6a', 'metadataHref': 'https://online.moysklad.ru/api/remap/1.2/entity/store/metadata', 'type': 'store', 'mediaType': 'application/json', 'uuidHref': 'https://online.moysklad.ru/app/#warehouse/edit?id=b1f58ce8-80e8-11e6-7a69-8f5500104e6a'}}, 'project': {'meta': {'href': 'https://online.moysklad.ru/api/remap/1.2/entity/project/ea69fc17-1389-11ea-0a80-064d0012f420', 'metadataHref': 'https://online.moysklad.ru/api/remap/1.2/entity/project/metadata', 'type': 'project', 'mediaType': 'application/json', 'uuidHref': 'https://online.moysklad.ru/app/#project/edit?id=ea69fc17-1389-11ea-0a80-064d0012f420'}}, 'agent': {'meta': {'href': 'https://online.moysklad.ru/api/remap/1.2/entity/counterparty/85c51879-2edc-11e6-7a69-93a7000e4121', 'metadataHref': 'https://online.moysklad.ru/api/remap/1.2/entity/counterparty/metadata', 'type': 'counterparty', 'mediaType': 'application/json', 'uuidHref': 'https://online.moysklad.ru/app/#company/edit?id=85c51879-2edc-11e6-7a69-93a7000e4121'}}, 'organization': {'meta': {'href': 'https://online.moysklad.ru/api/remap/1.2/entity/organization/b66837ad-d66c-11e6-7a69-9711004b5836', 'metadataHref': 'https://online.moysklad.ru/api/remap/1.2/entity/organization/metadata', 'type': 'organization', 'mediaType': 'application/json', 'uuidHref': 'https://online.moysklad.ru/app/#mycompany/edit?id=b66837ad-d66c-11e6-7a69-9711004b5836'}}, 'state': {'meta': {'href': 'https://online.moysklad.ru/api/remap/1.2/entity/supply/metadata/states/8c19155b-3f70-11e6-7a69-93a70004f499', 'metadataHref': 'https://online.moysklad.ru/api/remap/1.2/entity/supply/metadata', 'type': 'state', 'mediaType': 'application/json'}}, 'created': '2020-10-05 00:59:18.007', 'files': {'meta': {'href': 'https://online.moysklad.ru/api/remap/1.2/entity/supply/d988086f-068c-11eb-0a80-0995001ce46a/files', 'type': 'files', 'mediaType': 'application/json', 'size': 0, 'limit': 1000, 'offset': 0}}, 'positions': {'meta': {'href': 'https://online.moysklad.ru/api/remap/1.2/entity/supply/d988086f-068c-11eb-0a80-0995001ce46a/positions', 'type': 'supplyposition', 'mediaType': 'application/json', 'size': 1, 'limit': 1000, 'offset': 0}}, 'vatEnabled': True, 'vatIncluded': True, 'vatSum': 0.0, 'payedSum': 0.0, 'invoicesIn': [{'href': 'https://online.moysklad.ru/api/remap/1.2/entity/invoicein/8983af76-0733-11eb-0a80-039400008459', 'metadataHref': 'https://online.moysklad.ru/api/remap/1.2/entity/invoicein/metadata', 'type': 'invoicein', 'mediaType': 'application/json', 'uuidHref': 'https://online.moysklad.ru/app/#invoicein/edit?id=8983af76-0733-11eb-0a80-039400008459'}]})
+2020-10-05T20:55:02.991591+0300 ERROR An error has been caught in function 'start', process 'ForkPoolWorker-1' (20146), thread 'MainThread' (139781240424256):
+Traceback (most recent call last):
+
+  File "/home/admin/code/panel-tf/venv/bin/celery", line 8, in <module>
+    sys.exit(main())
+    │   │    └ <function main at 0x7f215adaa8b0>
+    │   └ <function Worker.__call__.<locals>.exit at 0x7f2156e173a0>
+    └ <module 'sys' (built-in)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/__main__.py", line 16, in main
+    _main()
+    └ <function main at 0x7f2159f2e280>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bin/celery.py", line 322, in main
+    cmd.execute_from_commandline(argv)
+    │   │                        └ None
+    │   └ <function CeleryCommand.execute_from_commandline at 0x7f2159f2e9d0>
+    └ <celery.bin.celery.CeleryCommand object at 0x7f215adec1c0>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bin/celery.py", line 495, in execute_from_commandline
+    super(CeleryCommand, self).execute_from_commandline(argv)))
+          │              │                              └ ['/home/admin/code/panel-tf/venv/bin/celery', '-A', 'panel', 'worker', '--loglevel=info']
+          │              └ <celery.bin.celery.CeleryCommand object at 0x7f215adec1c0>
+          └ <class 'celery.bin.celery.CeleryCommand'>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bin/base.py", line 305, in execute_from_commandline
+    return self.handle_argv(self.prog_name, argv[1:])
+           │    │           │    │          └ ['/home/admin/code/panel-tf/venv/bin/celery', '-A', 'panel', 'worker', '--loglevel=info']
+           │    │           │    └ 'celery'
+           │    │           └ <celery.bin.celery.CeleryCommand object at 0x7f215adec1c0>
+           │    └ <function CeleryCommand.handle_argv at 0x7f2159f2e940>
+           └ <celery.bin.celery.CeleryCommand object at 0x7f215adec1c0>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bin/celery.py", line 487, in handle_argv
+    return self.execute(command, argv)
+           │    │       │        └ ['worker', '--loglevel=info', '-A', 'panel']
+           │    │       └ 'worker'
+           │    └ <function CeleryCommand.execute at 0x7f2159f2e700>
+           └ <celery.bin.celery.CeleryCommand object at 0x7f215adec1c0>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bin/celery.py", line 415, in execute
+    return cls(
+           └ <class 'celery.bin.worker.worker'>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bin/worker.py", line 223, in run_from_argv
+    return self(*args, **options)
+           │     │       └ {'app': 'panel', 'broker': None, 'result_backend': None, 'loader': None, 'config': None, 'workdir': None, 'no_color': None, '...
+           │     └ []
+           └ <celery.bin.worker.worker object at 0x7f215aceaf40>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bin/base.py", line 253, in __call__
+    ret = self.run(*args, **kwargs)
+          │    │    │       └ {'app': 'panel', 'broker': None, 'result_backend': None, 'loader': None, 'config': None, 'workdir': None, 'no_color': None, '...
+          │    │    └ ()
+          │    └ <function worker.run at 0x7f2159f2e0d0>
+          └ <celery.bin.worker.worker object at 0x7f215aceaf40>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bin/worker.py", line 259, in run
+    worker.start()
+    │      └ <function WorkController.start at 0x7f215a615820>
+    └ <Worker: celery@panel-tf (running)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/worker/worker.py", line 205, in start
+    self.blueprint.start(self)
+    │    │         │     └ <Worker: celery@panel-tf (running)>
+    │    │         └ <function Blueprint.start at 0x7f215a5f6c10>
+    │    └ <celery.worker.worker.WorkController.Blueprint object at 0x7f2156e6c400>
+    └ <Worker: celery@panel-tf (running)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bootsteps.py", line 119, in start
+    step.start(parent)
+    │    │     └ <Worker: celery@panel-tf (running)>
+    │    └ <function StartStopStep.start at 0x7f215a60e820>
+    └ <step: Pool>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bootsteps.py", line 369, in start
+    return self.obj.start()
+           │    │   └ <function BasePool.start at 0x7f2156fc5310>
+           │    └ <celery.concurrency.prefork.TaskPool object at 0x7f2156e76bb0>
+           └ <step: Pool>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/concurrency/base.py", line 132, in start
+    self.on_start()
+    │    └ <function TaskPool.on_start at 0x7f2156e6e160>
+    └ <celery.concurrency.prefork.TaskPool object at 0x7f2156e76bb0>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/concurrency/prefork.py", line 111, in on_start
+    P = self._pool = Pool(processes=self.limit,
+        │    │       │              │    └ 2
+        │    │       │              └ <celery.concurrency.prefork.TaskPool object at 0x7f2156e76bb0>
+        │    │       └ <class 'celery.concurrency.asynpool.AsynPool'>
+        │    └ None
+        └ <celery.concurrency.prefork.TaskPool object at 0x7f2156e76bb0>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/concurrency/asynpool.py", line 486, in __init__
+    super(AsynPool, self).__init__(processes, *args, **kwargs)
+          │         │              │           │       └ {'initializer': <function process_initializer at 0x7f2156f3bca0>, 'on_process_exit': <function process_destructor at 0x7f2156...
+          │         │              │           └ ()
+          │         │              └ 2
+          │         └ <celery.concurrency.asynpool.AsynPool object at 0x7f2156de6580>
+          └ <class 'celery.concurrency.asynpool.AsynPool'>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/pool.py", line 1046, in __init__
+    self._create_worker_process(i)
+    │    │                      └ 0
+    │    └ <function AsynPool._create_worker_process at 0x7f2156e69d30>
+    └ <celery.concurrency.asynpool.AsynPool object at 0x7f2156de6580>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/concurrency/asynpool.py", line 503, in _create_worker_process
+    return super(AsynPool, self)._create_worker_process(i)
+                 │         │                            └ 0
+                 │         └ <celery.concurrency.asynpool.AsynPool object at 0x7f2156de6580>
+                 └ <class 'celery.concurrency.asynpool.AsynPool'>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/pool.py", line 1158, in _create_worker_process
+    w.start()
+    │ └ <function BaseProcess.start at 0x7f215a7b7ee0>
+    └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/process.py", line 124, in start
+    self._popen = self._Popen(self)
+    │    │        │    │      └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+    │    │        │    └ <staticmethod object at 0x7f215a890c40>
+    │    │        └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+    │    └ None
+    └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/context.py", line 333, in _Popen
+    return Popen(process_obj)
+           │     └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+           └ <class 'billiard.popen_fork.Popen'>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/popen_fork.py", line 24, in __init__
+    self._launch(process_obj)
+    │    │       └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+    │    └ <function Popen._launch at 0x7f2156e22280>
+    └ <billiard.popen_fork.Popen object at 0x7f2156e10d60>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/popen_fork.py", line 79, in _launch
+    code = process_obj._bootstrap()
+           │           └ <function BaseProcess._bootstrap at 0x7f215a6f5b80>
+           └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/process.py", line 327, in _bootstrap
+    self.run()
+    │    └ <function BaseProcess.run at 0x7f215a7b7e50>
+    └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/process.py", line 114, in run
+    self._target(*self._args, **self._kwargs)
+    │    │        │    │        │    └ {}
+    │    │        │    │        └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+    │    │        │    └ ()
+    │    │        └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+    │    └ <celery.concurrency.asynpool.Worker object at 0x7f2156e10d00>
+    └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/pool.py", line 292, in __call__
+    sys.exit(self.workloop(pid=pid))
+    │   │    │    │            └ 20146
+    │   │    │    └ <function Worker.workloop at 0x7f2156fa7ca0>
+    │   │    └ <celery.concurrency.asynpool.Worker object at 0x7f2156e10d00>
+    │   └ <function Worker.__call__.<locals>.exit at 0x7f2156e173a0>
+    └ <module 'sys' (built-in)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/pool.py", line 362, in workloop
+    result = (True, prepare_result(fun(*args, **kwargs)))
+                    │              │    │       └ {}
+                    │              │    └ ('start_project.tasks.start_project_by_spreadsheet_link_task', '7929412b-3cd5-41d2-84a6-fb0afd6bfadd', {'lang': 'py', 'task':...
+                    │              └ <function _fast_trace_task at 0x7f215a5eb310>
+                    └ <bound method Worker.prepare_result of <celery.concurrency.asynpool.Worker object at 0x7f2156e10d00>>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/app/trace.py", line 557, in _fast_trace_task
+    R, I, T, Rstr = tasks[task].__trace__(
+                    │     └ 'start_project.tasks.start_project_by_spreadsheet_link_task'
+                    └ {'start_project.tasks.start_project_by_webhook_task': <@task: start_project.tasks.start_project_by_webhook_task of panel at 0...
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/app/trace.py", line 385, in trace_task
+    R = retval = fun(*args, **kwargs)
+                 │    │       └ {}
+                 │    └ []
+                 └ <@task: start_project.tasks.start_project_by_spreadsheet_link_task of panel at 0x7f215957e4c0>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/app/trace.py", line 650, in __protected_call__
+    return self.run(*args, **kwargs)
+           │    │    │       └ {}
+           │    │    └ ()
+           │    └ <staticmethod object at 0x7f2156f6df10>
+           └ <@task: start_project.tasks.start_project_by_spreadsheet_link_task of panel at 0x7f215957e4c0>
+
+  File "/home/admin/code/panel-tf/panel/start_project/tasks.py", line 13, in start_project_by_spreadsheet_link_task
+    start_project_by_spreadsheet_link()
+    └ <function start_project_by_spreadsheet_link at 0x7f215703fee0>
+
+  File "/home/admin/code/panel-tf/panel/start_project/services/main.py", line 35, in start_project_by_spreadsheet_link
+    return start(deal)
+           │     └ {'ID': '7031', 'TITLE': 'тест фк крд', 'TYPE_ID': 'SALE', 'STAGE_ID': '10', 'PROBABILITY': None, 'CURRENCY_ID': 'RUB', 'OPPOR...
+           └ <function start at 0x7f2156f1d940>
+
+> File "/home/admin/code/panel-tf/panel/start_project/services/main.py", line 374, in start
+    new_supply = create_document(
+                 └ <function create_document at 0x7f2157b63700>
+
+  File "/home/admin/code/panel-tf/panel/moysklad/services/entities/base.py", line 21, in create_document
+    response = _post(url=url, body=body)
+               │         │         └ {'accountId': 'c7c055ba-7c85-11e5-90a2-8ecb000043b0', 'owner': {'meta': {'href': 'https://online.moysklad.ru/api/remap/1.2/en...
+               │         └ 'https://online.moysklad.ru/api/remap/1.2/entity/supply'
+               └ <function _post at 0x7f2157b63c10>
+
+  File "/home/admin/code/panel-tf/panel/moysklad/services/entities/base.py", line 93, in _post
+    raise MoyskladException(r.text, url, body)
+          │                 │ │     │    └ {'accountId': 'c7c055ba-7c85-11e5-90a2-8ecb000043b0', 'owner': {'meta': {'href': 'https://online.moysklad.ru/api/remap/1.2/en...
+          │                 │ │     └ 'https://online.moysklad.ru/api/remap/1.2/entity/supply'
+          │                 │ └ <property object at 0x7f2157bb1720>
+          │                 └ <Response [412]>
+          └ <class 'moysklad.services.base.MoyskladException'>
+
+moysklad.services.base.MoyskladException: ('{\n  "errors" : [ {\n    "error" : "Ошибка сохранения объекта: поле \'agent\' не может быть пустым или отсутствовать",\n    "code" : 3000,\n    "parameter" : "agent",\n    "moreInfo" : "https://online.moysklad.ru/api/remap/1.2/doc#обработка-ошибок-3000",\n    "line" : 1,\n    "column" : 3522\n  }, {\n    "error" : "Ошибка сохранения объекта: поле \'organization\' не может быть пустым или отсутствовать",\n    "code" : 3000,\n    "parameter" : "organization",\n    "moreInfo" : "https://online.moysklad.ru/api/remap/1.2/doc#обработка-ошибок-3000",\n    "line" : 1,\n    "column" : 3522\n  } ]\n}', 'https://online.moysklad.ru/api/remap/1.2/entity/supply', {'accountId': 'c7c055ba-7c85-11e5-90a2-8ecb000043b0', 'owner': {'meta': {'href': 'https://online.moysklad.ru/api/remap/1.2/entity/employee/c6f72b9b-7c85-11e5-7a40-e897002c7305', 'metadataHref': 'https://online.moysklad.ru/api/remap/1.2/entity/employee/metadata', 'type': 'employee', 'mediaType': 'application/json', 'uuidHref': 'https://online.moysklad.ru/app/#employee/edit?id=c6f72b9b-7c85-11e5-7a40-e897002c7305'}}, 'shared': False, 'group': {'meta': {'href': 'https://online.moysklad.ru/api/remap/1.2/entity/group/c7c0dfad-7c85-11e5-90a2-8ecb000043b1', 'metadataHref': 'https://online.moysklad.ru/api/remap/1.2/entity/group/metadata', 'type': 'group', 'mediaType': 'application/json'}}, 'updated': '2020-10-05 00:56:07.531', 'externalCode': '8qyZ6w4FhhLiDJnJNLO403', 'applicable': False, 'rate': {'currency': {'meta': {'href': 'https://online.moysklad.ru/api/remap/1.2/entity/currency/c702d53c-7c85-11e5-7a40-e897002c7333', 'metadataHref': 'https://online.moysklad.ru/api/remap/1.2/entity/currency/metadata', 'type': 'currency', 'mediaType': 'application/json', 'uuidHref': 'https://online.moysklad.ru/app/#currency/edit?id=c702d53c-7c85-11e5-7a40-e897002c7333'}}}, 'sum': 100.0, 'store': {'meta': {'href': 'https://online.moysklad.ru/api/remap/1.2/entity/store/b1f58ce8-80e8-11e6-7a69-8f5500104e6a', 'metadataHref': 'https://online.moysklad.ru/api/remap/1.2/entity/store/metadata', 'type': 'store', 'mediaType': 'application/json', 'uuidHref': 'https://online.moysklad.ru/app/#warehouse/edit?id=b1f58ce8-80e8-11e6-7a69-8f5500104e6a'}}, 'project': {'meta': {'href': 'https://online.moysklad.ru/api/remap/1.2/entity/project/ea69fc17-1389-11ea-0a80-064d0012f420', 'metadataHref': 'https://online.moysklad.ru/api/remap/1.2/entity/project/metadata', 'type': 'project', 'mediaType': 'application/json', 'uuidHref': 'https://online.moysklad.ru/app/#project/edit?id=ea69fc17-1389-11ea-0a80-064d0012f420'}}, 'agent': {'meta': {'href': 'https://online.moysklad.ru/api/remap/1.2/entity/counterparty/4eff5b23-03c2-11ea-0a80-06cf000845fd', 'metadataHref': 'https://online.moysklad.ru/api/remap/1.2/entity/counterparty/metadata', 'type': 'counterparty', 'mediaType': 'application/json', 'uuidHref': 'https://online.moysklad.ru/app/#company/edit?id=4eff5b23-03c2-11ea-0a80-06cf000845fd'}}, 'organization': {'meta': {'href': 'https://online.moysklad.ru/api/remap/1.2/entity/organization/b66837ad-d66c-11e6-7a69-9711004b5836', 'metadataHref': 'https://online.moysklad.ru/api/remap/1.2/entity/organization/metadata', 'type': 'organization', 'mediaType': 'application/json', 'uuidHref': 'https://online.moysklad.ru/app/#mycompany/edit?id=b66837ad-d66c-11e6-7a69-9711004b5836'}}, 'state': {'meta': {'href': 'https://online.moysklad.ru/api/remap/1.2/entity/supply/metadata/states/8c19155b-3f70-11e6-7a69-93a70004f499', 'metadataHref': 'https://online.moysklad.ru/api/remap/1.2/entity/supply/metadata', 'type': 'state', 'mediaType': 'application/json'}}, 'created': '2020-10-05 00:56:07.674', 'files': {'meta': {'href': 'https://online.moysklad.ru/api/remap/1.2/entity/supply/68156c18-068c-11eb-0a80-0995001ce3e2/files', 'type': 'files', 'mediaType': 'application/json', 'size': 0, 'limit': 1000, 'offset': 0}}, 'positions': {'meta': {'href': 'https://online.moysklad.ru/api/remap/1.2/entity/supply/68156c18-068c-11eb-0a80-0995001ce3e2/positions', 'type': 'supplyposition', 'mediaType': 'application/json', 'size': 1, 'limit': 1000, 'offset': 0}}, 'vatEnabled': True, 'vatIncluded': True, 'vatSum': 17.0, 'payedSum': 0.0, 'invoicesIn': [{'href': 'https://online.moysklad.ru/api/remap/1.2/entity/invoicein/e4cc0dfb-0733-11eb-0a80-090600008b55', 'metadataHref': 'https://online.moysklad.ru/api/remap/1.2/entity/invoicein/metadata', 'type': 'invoicein', 'mediaType': 'application/json', 'uuidHref': 'https://online.moysklad.ru/app/#invoicein/edit?id=e4cc0dfb-0733-11eb-0a80-090600008b55'}]})
+2020-10-05T20:55:09.661242+0300 ERROR An error has been caught in function 'start', process 'ForkPoolWorker-1' (20146), thread 'MainThread' (139781240424256):
+Traceback (most recent call last):
+
+  File "/home/admin/code/panel-tf/venv/bin/celery", line 8, in <module>
+    sys.exit(main())
+    │   │    └ <function main at 0x7f215adaa8b0>
+    │   └ <function Worker.__call__.<locals>.exit at 0x7f2156e173a0>
+    └ <module 'sys' (built-in)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/__main__.py", line 16, in main
+    _main()
+    └ <function main at 0x7f2159f2e280>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bin/celery.py", line 322, in main
+    cmd.execute_from_commandline(argv)
+    │   │                        └ None
+    │   └ <function CeleryCommand.execute_from_commandline at 0x7f2159f2e9d0>
+    └ <celery.bin.celery.CeleryCommand object at 0x7f215adec1c0>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bin/celery.py", line 495, in execute_from_commandline
+    super(CeleryCommand, self).execute_from_commandline(argv)))
+          │              │                              └ ['/home/admin/code/panel-tf/venv/bin/celery', '-A', 'panel', 'worker', '--loglevel=info']
+          │              └ <celery.bin.celery.CeleryCommand object at 0x7f215adec1c0>
+          └ <class 'celery.bin.celery.CeleryCommand'>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bin/base.py", line 305, in execute_from_commandline
+    return self.handle_argv(self.prog_name, argv[1:])
+           │    │           │    │          └ ['/home/admin/code/panel-tf/venv/bin/celery', '-A', 'panel', 'worker', '--loglevel=info']
+           │    │           │    └ 'celery'
+           │    │           └ <celery.bin.celery.CeleryCommand object at 0x7f215adec1c0>
+           │    └ <function CeleryCommand.handle_argv at 0x7f2159f2e940>
+           └ <celery.bin.celery.CeleryCommand object at 0x7f215adec1c0>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bin/celery.py", line 487, in handle_argv
+    return self.execute(command, argv)
+           │    │       │        └ ['worker', '--loglevel=info', '-A', 'panel']
+           │    │       └ 'worker'
+           │    └ <function CeleryCommand.execute at 0x7f2159f2e700>
+           └ <celery.bin.celery.CeleryCommand object at 0x7f215adec1c0>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bin/celery.py", line 415, in execute
+    return cls(
+           └ <class 'celery.bin.worker.worker'>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bin/worker.py", line 223, in run_from_argv
+    return self(*args, **options)
+           │     │       └ {'app': 'panel', 'broker': None, 'result_backend': None, 'loader': None, 'config': None, 'workdir': None, 'no_color': None, '...
+           │     └ []
+           └ <celery.bin.worker.worker object at 0x7f215aceaf40>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bin/base.py", line 253, in __call__
+    ret = self.run(*args, **kwargs)
+          │    │    │       └ {'app': 'panel', 'broker': None, 'result_backend': None, 'loader': None, 'config': None, 'workdir': None, 'no_color': None, '...
+          │    │    └ ()
+          │    └ <function worker.run at 0x7f2159f2e0d0>
+          └ <celery.bin.worker.worker object at 0x7f215aceaf40>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bin/worker.py", line 259, in run
+    worker.start()
+    │      └ <function WorkController.start at 0x7f215a615820>
+    └ <Worker: celery@panel-tf (running)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/worker/worker.py", line 205, in start
+    self.blueprint.start(self)
+    │    │         │     └ <Worker: celery@panel-tf (running)>
+    │    │         └ <function Blueprint.start at 0x7f215a5f6c10>
+    │    └ <celery.worker.worker.WorkController.Blueprint object at 0x7f2156e6c400>
+    └ <Worker: celery@panel-tf (running)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bootsteps.py", line 119, in start
+    step.start(parent)
+    │    │     └ <Worker: celery@panel-tf (running)>
+    │    └ <function StartStopStep.start at 0x7f215a60e820>
+    └ <step: Pool>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bootsteps.py", line 369, in start
+    return self.obj.start()
+           │    │   └ <function BasePool.start at 0x7f2156fc5310>
+           │    └ <celery.concurrency.prefork.TaskPool object at 0x7f2156e76bb0>
+           └ <step: Pool>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/concurrency/base.py", line 132, in start
+    self.on_start()
+    │    └ <function TaskPool.on_start at 0x7f2156e6e160>
+    └ <celery.concurrency.prefork.TaskPool object at 0x7f2156e76bb0>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/concurrency/prefork.py", line 111, in on_start
+    P = self._pool = Pool(processes=self.limit,
+        │    │       │              │    └ 2
+        │    │       │              └ <celery.concurrency.prefork.TaskPool object at 0x7f2156e76bb0>
+        │    │       └ <class 'celery.concurrency.asynpool.AsynPool'>
+        │    └ None
+        └ <celery.concurrency.prefork.TaskPool object at 0x7f2156e76bb0>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/concurrency/asynpool.py", line 486, in __init__
+    super(AsynPool, self).__init__(processes, *args, **kwargs)
+          │         │              │           │       └ {'initializer': <function process_initializer at 0x7f2156f3bca0>, 'on_process_exit': <function process_destructor at 0x7f2156...
+          │         │              │           └ ()
+          │         │              └ 2
+          │         └ <celery.concurrency.asynpool.AsynPool object at 0x7f2156de6580>
+          └ <class 'celery.concurrency.asynpool.AsynPool'>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/pool.py", line 1046, in __init__
+    self._create_worker_process(i)
+    │    │                      └ 0
+    │    └ <function AsynPool._create_worker_process at 0x7f2156e69d30>
+    └ <celery.concurrency.asynpool.AsynPool object at 0x7f2156de6580>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/concurrency/asynpool.py", line 503, in _create_worker_process
+    return super(AsynPool, self)._create_worker_process(i)
+                 │         │                            └ 0
+                 │         └ <celery.concurrency.asynpool.AsynPool object at 0x7f2156de6580>
+                 └ <class 'celery.concurrency.asynpool.AsynPool'>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/pool.py", line 1158, in _create_worker_process
+    w.start()
+    │ └ <function BaseProcess.start at 0x7f215a7b7ee0>
+    └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/process.py", line 124, in start
+    self._popen = self._Popen(self)
+    │    │        │    │      └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+    │    │        │    └ <staticmethod object at 0x7f215a890c40>
+    │    │        └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+    │    └ None
+    └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/context.py", line 333, in _Popen
+    return Popen(process_obj)
+           │     └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+           └ <class 'billiard.popen_fork.Popen'>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/popen_fork.py", line 24, in __init__
+    self._launch(process_obj)
+    │    │       └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+    │    └ <function Popen._launch at 0x7f2156e22280>
+    └ <billiard.popen_fork.Popen object at 0x7f2156e10d60>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/popen_fork.py", line 79, in _launch
+    code = process_obj._bootstrap()
+           │           └ <function BaseProcess._bootstrap at 0x7f215a6f5b80>
+           └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/process.py", line 327, in _bootstrap
+    self.run()
+    │    └ <function BaseProcess.run at 0x7f215a7b7e50>
+    └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/process.py", line 114, in run
+    self._target(*self._args, **self._kwargs)
+    │    │        │    │        │    └ {}
+    │    │        │    │        └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+    │    │        │    └ ()
+    │    │        └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+    │    └ <celery.concurrency.asynpool.Worker object at 0x7f2156e10d00>
+    └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/pool.py", line 292, in __call__
+    sys.exit(self.workloop(pid=pid))
+    │   │    │    │            └ 20146
+    │   │    │    └ <function Worker.workloop at 0x7f2156fa7ca0>
+    │   │    └ <celery.concurrency.asynpool.Worker object at 0x7f2156e10d00>
+    │   └ <function Worker.__call__.<locals>.exit at 0x7f2156e173a0>
+    └ <module 'sys' (built-in)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/pool.py", line 362, in workloop
+    result = (True, prepare_result(fun(*args, **kwargs)))
+                    │              │    │       └ {}
+                    │              │    └ ('start_project.tasks.start_project_by_spreadsheet_link_task', '7929412b-3cd5-41d2-84a6-fb0afd6bfadd', {'lang': 'py', 'task':...
+                    │              └ <function _fast_trace_task at 0x7f215a5eb310>
+                    └ <bound method Worker.prepare_result of <celery.concurrency.asynpool.Worker object at 0x7f2156e10d00>>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/app/trace.py", line 557, in _fast_trace_task
+    R, I, T, Rstr = tasks[task].__trace__(
+                    │     └ 'start_project.tasks.start_project_by_spreadsheet_link_task'
+                    └ {'start_project.tasks.start_project_by_webhook_task': <@task: start_project.tasks.start_project_by_webhook_task of panel at 0...
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/app/trace.py", line 385, in trace_task
+    R = retval = fun(*args, **kwargs)
+                 │    │       └ {}
+                 │    └ []
+                 └ <@task: start_project.tasks.start_project_by_spreadsheet_link_task of panel at 0x7f215957e4c0>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/app/trace.py", line 650, in __protected_call__
+    return self.run(*args, **kwargs)
+           │    │    │       └ {}
+           │    │    └ ()
+           │    └ <staticmethod object at 0x7f2156f6df10>
+           └ <@task: start_project.tasks.start_project_by_spreadsheet_link_task of panel at 0x7f215957e4c0>
+
+  File "/home/admin/code/panel-tf/panel/start_project/tasks.py", line 13, in start_project_by_spreadsheet_link_task
+    start_project_by_spreadsheet_link()
+    └ <function start_project_by_spreadsheet_link at 0x7f215703fee0>
+
+  File "/home/admin/code/panel-tf/panel/start_project/services/main.py", line 35, in start_project_by_spreadsheet_link
+    return start(deal)
+           │     └ {'ID': '7031', 'TITLE': 'тест фк крд', 'TYPE_ID': 'SALE', 'STAGE_ID': '10', 'PROBABILITY': None, 'CURRENCY_ID': 'RUB', 'OPPOR...
+           └ <function start at 0x7f2156f1d940>
+
+> File "/home/admin/code/panel-tf/panel/start_project/services/main.py", line 374, in start
+    new_supply = create_document(
+                 └ <function create_document at 0x7f2157b63700>
+
+  File "/home/admin/code/panel-tf/panel/moysklad/services/entities/base.py", line 21, in create_document
+    response = _post(url=url, body=body)
+               │         │         └ {'accountId': 'c7c055ba-7c85-11e5-90a2-8ecb000043b0', 'owner': {'meta': {'href': 'https://online.moysklad.ru/api/remap/1.2/en...
+               │         └ 'https://online.moysklad.ru/api/remap/1.2/entity/supply'
+               └ <function _post at 0x7f2157b63c10>
+
+  File "/home/admin/code/panel-tf/panel/moysklad/services/entities/base.py", line 93, in _post
+    raise MoyskladException(r.text, url, body)
+          │                 │ │     │    └ {'accountId': 'c7c055ba-7c85-11e5-90a2-8ecb000043b0', 'owner': {'meta': {'href': 'https://online.moysklad.ru/api/remap/1.2/en...
+          │                 │ │     └ 'https://online.moysklad.ru/api/remap/1.2/entity/supply'
+          │                 │ └ <property object at 0x7f2157bb1720>
+          │                 └ <Response [412]>
+          └ <class 'moysklad.services.base.MoyskladException'>
+
+moysklad.services.base.MoyskladException: ('{\n  "errors" : [ {\n    "error" : "Ошибка сохранения объекта: поле \'agent\' не может быть пустым или отсутствовать",\n    "code" : 3000,\n    "parameter" : "agent",\n    "moreInfo" : "https://online.moysklad.ru/api/remap/1.2/doc#обработка-ошибок-3000",\n    "line" : 1,\n    "column" : 3521\n  }, {\n    "error" : "Ошибка сохранения объекта: поле \'organization\' не может быть пустым или отсутствовать",\n    "code" : 3000,\n    "parameter" : "organization",\n    "moreInfo" : "https://online.moysklad.ru/api/remap/1.2/doc#обработка-ошибок-3000",\n    "line" : 1,\n    "column" : 3521\n  } ]\n}', 'https://online.moysklad.ru/api/remap/1.2/entity/supply', {'accountId': 'c7c055ba-7c85-11e5-90a2-8ecb000043b0', 'owner': {'meta': {'href': 'https://online.moysklad.ru/api/remap/1.2/entity/employee/c6f72b9b-7c85-11e5-7a40-e897002c7305', 'metadataHref': 'https://online.moysklad.ru/api/remap/1.2/entity/employee/metadata', 'type': 'employee', 'mediaType': 'application/json', 'uuidHref': 'https://online.moysklad.ru/app/#employee/edit?id=c6f72b9b-7c85-11e5-7a40-e897002c7305'}}, 'shared': False, 'group': {'meta': {'href': 'https://online.moysklad.ru/api/remap/1.2/entity/group/c7c0dfad-7c85-11e5-90a2-8ecb000043b1', 'metadataHref': 'https://online.moysklad.ru/api/remap/1.2/entity/group/metadata', 'type': 'group', 'mediaType': 'application/json'}}, 'updated': '2020-10-05 00:59:17.873', 'externalCode': 'I4KaBrZZh6QZMZ90hII273', 'applicable': False, 'rate': {'currency': {'meta': {'href': 'https://online.moysklad.ru/api/remap/1.2/entity/currency/c702d53c-7c85-11e5-7a40-e897002c7333', 'metadataHref': 'https://online.moysklad.ru/api/remap/1.2/entity/currency/metadata', 'type': 'currency', 'mediaType': 'application/json', 'uuidHref': 'https://online.moysklad.ru/app/#currency/edit?id=c702d53c-7c85-11e5-7a40-e897002c7333'}}}, 'sum': 100.0, 'store': {'meta': {'href': 'https://online.moysklad.ru/api/remap/1.2/entity/store/b1f58ce8-80e8-11e6-7a69-8f5500104e6a', 'metadataHref': 'https://online.moysklad.ru/api/remap/1.2/entity/store/metadata', 'type': 'store', 'mediaType': 'application/json', 'uuidHref': 'https://online.moysklad.ru/app/#warehouse/edit?id=b1f58ce8-80e8-11e6-7a69-8f5500104e6a'}}, 'project': {'meta': {'href': 'https://online.moysklad.ru/api/remap/1.2/entity/project/ea69fc17-1389-11ea-0a80-064d0012f420', 'metadataHref': 'https://online.moysklad.ru/api/remap/1.2/entity/project/metadata', 'type': 'project', 'mediaType': 'application/json', 'uuidHref': 'https://online.moysklad.ru/app/#project/edit?id=ea69fc17-1389-11ea-0a80-064d0012f420'}}, 'agent': {'meta': {'href': 'https://online.moysklad.ru/api/remap/1.2/entity/counterparty/85c51879-2edc-11e6-7a69-93a7000e4121', 'metadataHref': 'https://online.moysklad.ru/api/remap/1.2/entity/counterparty/metadata', 'type': 'counterparty', 'mediaType': 'application/json', 'uuidHref': 'https://online.moysklad.ru/app/#company/edit?id=85c51879-2edc-11e6-7a69-93a7000e4121'}}, 'organization': {'meta': {'href': 'https://online.moysklad.ru/api/remap/1.2/entity/organization/b66837ad-d66c-11e6-7a69-9711004b5836', 'metadataHref': 'https://online.moysklad.ru/api/remap/1.2/entity/organization/metadata', 'type': 'organization', 'mediaType': 'application/json', 'uuidHref': 'https://online.moysklad.ru/app/#mycompany/edit?id=b66837ad-d66c-11e6-7a69-9711004b5836'}}, 'state': {'meta': {'href': 'https://online.moysklad.ru/api/remap/1.2/entity/supply/metadata/states/8c19155b-3f70-11e6-7a69-93a70004f499', 'metadataHref': 'https://online.moysklad.ru/api/remap/1.2/entity/supply/metadata', 'type': 'state', 'mediaType': 'application/json'}}, 'created': '2020-10-05 00:59:18.007', 'files': {'meta': {'href': 'https://online.moysklad.ru/api/remap/1.2/entity/supply/d988086f-068c-11eb-0a80-0995001ce46a/files', 'type': 'files', 'mediaType': 'application/json', 'size': 0, 'limit': 1000, 'offset': 0}}, 'positions': {'meta': {'href': 'https://online.moysklad.ru/api/remap/1.2/entity/supply/d988086f-068c-11eb-0a80-0995001ce46a/positions', 'type': 'supplyposition', 'mediaType': 'application/json', 'size': 1, 'limit': 1000, 'offset': 0}}, 'vatEnabled': True, 'vatIncluded': True, 'vatSum': 0.0, 'payedSum': 0.0, 'invoicesIn': [{'href': 'https://online.moysklad.ru/api/remap/1.2/entity/invoicein/e8bd70ee-0733-11eb-0a80-006000008d24', 'metadataHref': 'https://online.moysklad.ru/api/remap/1.2/entity/invoicein/metadata', 'type': 'invoicein', 'mediaType': 'application/json', 'uuidHref': 'https://online.moysklad.ru/app/#invoicein/edit?id=e8bd70ee-0733-11eb-0a80-006000008d24'}]})
+2020-10-05T22:26:34.660500+0300 ERROR An error has been caught in function 'start_project_by_spreadsheet_link_task', process 'ForkPoolWorker-1' (21730), thread 'MainThread' (140209378723648):
+Traceback (most recent call last):
+
+  File "/home/admin/code/panel-tf/venv/bin/celery", line 8, in <module>
+    sys.exit(main())
+    │   │    └ <function main at 0x7f8509e2a8b0>
+    │   └ <function Worker.__call__.<locals>.exit at 0x7f8505ed93a0>
+    └ <module 'sys' (built-in)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/__main__.py", line 16, in main
+    _main()
+    └ <function main at 0x7f8508fae280>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bin/celery.py", line 322, in main
+    cmd.execute_from_commandline(argv)
+    │   │                        └ None
+    │   └ <function CeleryCommand.execute_from_commandline at 0x7f8508fae9d0>
+    └ <celery.bin.celery.CeleryCommand object at 0x7f8509e6c1c0>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bin/celery.py", line 495, in execute_from_commandline
+    super(CeleryCommand, self).execute_from_commandline(argv)))
+          │              │                              └ ['/home/admin/code/panel-tf/venv/bin/celery', '-A', 'panel', 'worker', '--loglevel=info']
+          │              └ <celery.bin.celery.CeleryCommand object at 0x7f8509e6c1c0>
+          └ <class 'celery.bin.celery.CeleryCommand'>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bin/base.py", line 305, in execute_from_commandline
+    return self.handle_argv(self.prog_name, argv[1:])
+           │    │           │    │          └ ['/home/admin/code/panel-tf/venv/bin/celery', '-A', 'panel', 'worker', '--loglevel=info']
+           │    │           │    └ 'celery'
+           │    │           └ <celery.bin.celery.CeleryCommand object at 0x7f8509e6c1c0>
+           │    └ <function CeleryCommand.handle_argv at 0x7f8508fae940>
+           └ <celery.bin.celery.CeleryCommand object at 0x7f8509e6c1c0>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bin/celery.py", line 487, in handle_argv
+    return self.execute(command, argv)
+           │    │       │        └ ['worker', '--loglevel=info', '-A', 'panel']
+           │    │       └ 'worker'
+           │    └ <function CeleryCommand.execute at 0x7f8508fae700>
+           └ <celery.bin.celery.CeleryCommand object at 0x7f8509e6c1c0>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bin/celery.py", line 415, in execute
+    return cls(
+           └ <class 'celery.bin.worker.worker'>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bin/worker.py", line 223, in run_from_argv
+    return self(*args, **options)
+           │     │       └ {'app': 'panel', 'broker': None, 'result_backend': None, 'loader': None, 'config': None, 'workdir': None, 'no_color': None, '...
+           │     └ []
+           └ <celery.bin.worker.worker object at 0x7f8509d69f40>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bin/base.py", line 253, in __call__
+    ret = self.run(*args, **kwargs)
+          │    │    │       └ {'app': 'panel', 'broker': None, 'result_backend': None, 'loader': None, 'config': None, 'workdir': None, 'no_color': None, '...
+          │    │    └ ()
+          │    └ <function worker.run at 0x7f8508fae0d0>
+          └ <celery.bin.worker.worker object at 0x7f8509d69f40>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bin/worker.py", line 259, in run
+    worker.start()
+    │      └ <function WorkController.start at 0x7f8509695820>
+    └ <Worker: celery@panel-tf (running)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/worker/worker.py", line 205, in start
+    self.blueprint.start(self)
+    │    │         │     └ <Worker: celery@panel-tf (running)>
+    │    │         └ <function Blueprint.start at 0x7f8509676c10>
+    │    └ <celery.worker.worker.WorkController.Blueprint object at 0x7f8505f2d2b0>
+    └ <Worker: celery@panel-tf (running)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bootsteps.py", line 119, in start
+    step.start(parent)
+    │    │     └ <Worker: celery@panel-tf (running)>
+    │    └ <function StartStopStep.start at 0x7f850968e820>
+    └ <step: Pool>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/bootsteps.py", line 369, in start
+    return self.obj.start()
+           │    │   └ <function BasePool.start at 0x7f85060a3310>
+           │    └ <celery.concurrency.prefork.TaskPool object at 0x7f8505f3aa60>
+           └ <step: Pool>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/concurrency/base.py", line 132, in start
+    self.on_start()
+    │    └ <function TaskPool.on_start at 0x7f8505f2e160>
+    └ <celery.concurrency.prefork.TaskPool object at 0x7f8505f3aa60>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/concurrency/prefork.py", line 111, in on_start
+    P = self._pool = Pool(processes=self.limit,
+        │    │       │              │    └ 2
+        │    │       │              └ <celery.concurrency.prefork.TaskPool object at 0x7f8505f3aa60>
+        │    │       └ <class 'celery.concurrency.asynpool.AsynPool'>
+        │    └ None
+        └ <celery.concurrency.prefork.TaskPool object at 0x7f8505f3aa60>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/concurrency/asynpool.py", line 486, in __init__
+    super(AsynPool, self).__init__(processes, *args, **kwargs)
+          │         │              │           │       └ {'initializer': <function process_initializer at 0x7f8505fefca0>, 'on_process_exit': <function process_destructor at 0x7f8506...
+          │         │              │           └ ()
+          │         │              └ 2
+          │         └ <celery.concurrency.asynpool.AsynPool object at 0x7f8505ea8400>
+          └ <class 'celery.concurrency.asynpool.AsynPool'>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/pool.py", line 1046, in __init__
+    self._create_worker_process(i)
+    │    │                      └ 0
+    │    └ <function AsynPool._create_worker_process at 0x7f8505f29d30>
+    └ <celery.concurrency.asynpool.AsynPool object at 0x7f8505ea8400>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/concurrency/asynpool.py", line 503, in _create_worker_process
+    return super(AsynPool, self)._create_worker_process(i)
+                 │         │                            └ 0
+                 │         └ <celery.concurrency.asynpool.AsynPool object at 0x7f8505ea8400>
+                 └ <class 'celery.concurrency.asynpool.AsynPool'>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/pool.py", line 1158, in _create_worker_process
+    w.start()
+    │ └ <function BaseProcess.start at 0x7f8509837ee0>
+    └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/process.py", line 124, in start
+    self._popen = self._Popen(self)
+    │    │        │    │      └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+    │    │        │    └ <staticmethod object at 0x7f8509910c40>
+    │    │        └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+    │    └ None
+    └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/context.py", line 333, in _Popen
+    return Popen(process_obj)
+           │     └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+           └ <class 'billiard.popen_fork.Popen'>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/popen_fork.py", line 24, in __init__
+    self._launch(process_obj)
+    │    │       └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+    │    └ <function Popen._launch at 0x7f8505ee1280>
+    └ <billiard.popen_fork.Popen object at 0x7f8505ed1c10>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/popen_fork.py", line 79, in _launch
+    code = process_obj._bootstrap()
+           │           └ <function BaseProcess._bootstrap at 0x7f8509775b80>
+           └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/process.py", line 327, in _bootstrap
+    self.run()
+    │    └ <function BaseProcess.run at 0x7f8509837e50>
+    └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/process.py", line 114, in run
+    self._target(*self._args, **self._kwargs)
+    │    │        │    │        │    └ {}
+    │    │        │    │        └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+    │    │        │    └ ()
+    │    │        └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+    │    └ <celery.concurrency.asynpool.Worker object at 0x7f8505ed1bb0>
+    └ <ForkProcess(ForkPoolWorker-1, started daemon)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/pool.py", line 292, in __call__
+    sys.exit(self.workloop(pid=pid))
+    │   │    │    │            └ 21730
+    │   │    │    └ <function Worker.workloop at 0x7f8506067ca0>
+    │   │    └ <celery.concurrency.asynpool.Worker object at 0x7f8505ed1bb0>
+    │   └ <function Worker.__call__.<locals>.exit at 0x7f8505ed93a0>
+    └ <module 'sys' (built-in)>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/billiard/pool.py", line 362, in workloop
+    result = (True, prepare_result(fun(*args, **kwargs)))
+                    │              │    │       └ {}
+                    │              │    └ ('start_project.tasks.start_project_by_spreadsheet_link_task', '0d3e906a-b2a6-492d-8af4-39832d0b108e', {'lang': 'py', 'task':...
+                    │              └ <function _fast_trace_task at 0x7f850966b310>
+                    └ <bound method Worker.prepare_result of <celery.concurrency.asynpool.Worker object at 0x7f8505ed1bb0>>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/app/trace.py", line 557, in _fast_trace_task
+    R, I, T, Rstr = tasks[task].__trace__(
+                    │     └ 'start_project.tasks.start_project_by_spreadsheet_link_task'
+                    └ {'celery.chain': <@task: celery.chain of panel at 0x7f85085fe4c0>, 'celery.backend_cleanup': <@task: celery.backend_cleanup o...
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/app/trace.py", line 385, in trace_task
+    R = retval = fun(*args, **kwargs)
+                 │    │       └ {}
+                 │    └ []
+                 └ <@task: start_project.tasks.start_project_by_spreadsheet_link_task of panel at 0x7f85085fe4c0>
+  File "/home/admin/code/panel-tf/venv/lib/python3.8/site-packages/celery/app/trace.py", line 650, in __protected_call__
+    return self.run(*args, **kwargs)
+           │    │    │       └ {}
+           │    │    └ ()
+           │    └ <staticmethod object at 0x7f8505fb43a0>
+           └ <@task: start_project.tasks.start_project_by_spreadsheet_link_task of panel at 0x7f85085fe4c0>
+
+> File "/home/admin/code/panel-tf/panel/start_project/tasks.py", line 13, in start_project_by_spreadsheet_link_task
+    start_project_by_spreadsheet_link()
+    └ <function start_project_by_spreadsheet_link at 0x7f85060bfee0>
+
+  File "/home/admin/code/panel-tf/panel/start_project/services/main.py", line 34, in start_project_by_spreadsheet_link
+    deal = _get_deal()
+           └ <function _get_deal at 0x7f8505de1700>
+
+  File "/home/admin/code/panel-tf/panel/start_project/services/main.py", line 92, in _get_deal
+    raise Exception('Нет сделки!')
+
+Exception: Нет сделки!
