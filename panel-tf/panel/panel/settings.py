@@ -32,25 +32,10 @@ CORS_ORIGIN_WHITELIST = [
     "http://localhost:8080",
     "http://localhost:9000",
     "http://localhost:8000",
+    "http://localhost:8001",
     #"http://panel.tehno-fasad.ru",
     "http://localhost:3000",
 ]
-
-REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ],
-    'DEFAULT_FILTER_BACKENDS': [
-    'django_filters.rest_framework.DjangoFilterBackend'
-    ],
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.BasicAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.TokenAuthentication',
-    ],
-}
 
 # Application definition
 
@@ -61,13 +46,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
-    'rest_framework.authtoken',
     "corsheaders",
     'django_celery_beat',
     'info_lists',
     'startpage',
-    'api',
     'box_office',
     'bank',
     'create_project_folder',
