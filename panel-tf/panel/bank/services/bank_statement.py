@@ -20,7 +20,7 @@ def get_bank_statement():
             chrome_options.add_argument('--headless')
             chrome_options.add_argument('--no-sandbox')
             chrome_options.add_argument('--disable-dev-shm-usage')
-            driver = webdriver.Chrome(chrome_options=chrome_options, executable_path='/usr/src/panel-tf/panel/startpage/services/selenium/chromedriver')
+            driver = webdriver.Chrome(chrome_options=chrome_options)
             driver.implicitly_wait(40)  # неявное ожидание появления элемента в видимости
             driver.set_page_load_timeout("{}".format(40))
 

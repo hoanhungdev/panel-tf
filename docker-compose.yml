@@ -73,7 +73,7 @@ services:
     env_file:
       - ./.env
     environment: 
-      - PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/src/panel-tf/panel/startpage/services/selenium
+      - PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/src/panel-tf/panel/startpage/services/selenium/
     links:
       - redis:redis
     depends_on: 

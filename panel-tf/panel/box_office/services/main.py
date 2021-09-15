@@ -99,11 +99,11 @@ def _proceed():
         print(row)
         # необходимо для записи в верную строку
         row_id += first_string_index + 1
-        if len(row) < 6 or \
-                (len(row) > 5 and not is_amounts_valid(write_error=False)):
+        if len(row) < 3 or \
+                (len(row) > 2 and not is_amounts_valid(write_error=False)):
             breakpoint += 1
             # если встречается 2 пустые строки подряд, то дальше не иду
-            if breakpoint > 1:
+            if breakpoint > 2:
                 break
         else:
             global comment, amount, expenseitem
