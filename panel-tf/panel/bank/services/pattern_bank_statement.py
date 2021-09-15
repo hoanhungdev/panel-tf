@@ -12,7 +12,7 @@ from startpage.models import Auth
 SeleniumTimeout = 40
 
 def DoDownload(driver, VypiskaIz, SchetName):
-    NowDate = datetime.datetime.now()
+    NowDate = datetime.now()
     # ============== Логинюсь
     driver.get("https://online.moysklad.ru/")
 

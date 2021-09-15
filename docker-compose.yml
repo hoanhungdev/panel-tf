@@ -76,9 +76,11 @@ services:
       - PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/src/panel-tf/panel/startpage/services/selenium/
     links:
       - redis:redis
+      - selenium:selenium
     depends_on: 
       - redis
       - web
+      - selenium
     networks:
       - djangonetwork
 
@@ -120,7 +122,13 @@ services:
     networks:
       - djangonetwork
 
-
+  selenium:
+    container_name: selenium
+    image: selenium/standalone-chrome
+    ports:
+    - 4444:4444
+    networks:
+      - djangonetwork
 
 volumes:
   postgres:

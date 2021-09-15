@@ -482,6 +482,12 @@ def _write_success(response: dict, column: int):
     write_to_sheet(spreadsheet_id=spreadsheet_id, sheet='РАЗБОР',
             column=control_column, row_id=row_id, data='')
 
+def _get_value(source, key):
+    try:
+        return source[key]
+    except:
+        return ''
+
 def _is_order_created(write_error: bool):
     """
     функция принимает строку таблицы,
@@ -489,7 +495,7 @@ def _is_order_created(write_error: bool):
     и ложь, если платеж не создан
     """
     try:
-        if row[order_column].replace(' ', '') == '':
+        if _get_value(row, order_column).replace(' ', '') == '':
             return False
         else:
             if write_error:
@@ -500,7 +506,7 @@ def _is_order_created(write_error: bool):
 
 def _is_date_empty():
     try:
-        data = row[data_column].replace(' ', '')
+        data =_get_value(row, data_column).replace(' ', '')
     except IndexError:
         return True
     if data == '':
@@ -549,7 +555,7 @@ def is_amounts_valid(write_error: bool):
 
 def _is_agent_empty(write_error: bool):
     """Проверка пустая ли ячейка с наименованием контрагента"""
-    agent = row[contragent_column].replace(' ', '')
+    agent = _get_value(row, contragent_column).replace(' ', '')
     if agent == '':
         if write_error:
             _write_error(text='Поле КОНТРАГЕНТ пустое!')
@@ -559,7 +565,7 @@ def _is_agent_empty(write_error: bool):
 
 def _is_proekt_empty(write_error: bool):
     """Проверка пустая ли ячейка с наименованием проекта"""
-    project = row[project_column].replace(' ', '')
+    project = _get_value(row, project_column).replace(' ', '')
     if project == '':
         if write_error:
             _write_error(text='Поле КОНТРАГЕНТ пустое!')
@@ -568,7 +574,7 @@ def _is_proekt_empty(write_error: bool):
         return False
 
 def _is_priemka_empty(write_error: bool):
-    priemka = row[priemka_column].replace(' ', '')
+    priemka = _get_value(row, priemka_column).replace(' ', '')
     if priemka == '':
         if write_error:
             _write_error(text='Поле ПРИЕМКА пустое!')
@@ -577,7 +583,7 @@ def _is_priemka_empty(write_error: bool):
         return False
 
 def _is_zakaz_empty(write_error: bool):
-    zakaz = row[zakaz_column].replace(' ', '')
+    zakaz = _get_value(row, zakaz_column).replace(' ', '')
     if zakaz == '':
         if write_error:
             _write_error(text='Поле ЗАКАЗ пустое!')

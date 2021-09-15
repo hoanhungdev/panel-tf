@@ -1,5 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 from bank.services.pattern_bank_statement import DoDownload
 
@@ -20,7 +21,7 @@ def get_bank_statement():
             chrome_options.add_argument('--headless')
             chrome_options.add_argument('--no-sandbox')
             chrome_options.add_argument('--disable-dev-shm-usage')
-            driver = webdriver.Chrome(chrome_options=chrome_options)
+            driver = webdriver.Remote("http://selenium:4444/wd/hub", desired_capabilities=chrome_options.to_capabilities())
             driver.implicitly_wait(40)  # неявное ожидание появления элемента в видимости
             driver.set_page_load_timeout("{}".format(40))
 
@@ -30,5 +31,5 @@ def get_bank_statement():
             else:
                 print("Ошибка: ", status)
                 
-            driver.quit()
+            # driver.quit()
 
